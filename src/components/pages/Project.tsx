@@ -1,15 +1,14 @@
 // Module imports
-import React, {Component} from 'react'
+import React, {Component, useState} from 'react'
 // Element imports
 import Footer from '../elements/Footer'
-import UploadImage from './AddProject/UploadFile';
+import UploadImage from './AddProject/UploadFile'
 // Asset imports
 import logoStatic from '../../assets/logo_static.png'
 import arrowUp from '../../assets/createProject/arrowUp.png'
 
 interface State{
-    artsCount : number;
-    projectCount: any;
+    artsCount : number
 }
 interface Props{
 
@@ -20,8 +19,7 @@ class Project extends Component<Props, State>{
     constructor(props: Props) {
         super(props);
         this.state = {
-            artsCount : 1,
-            projectCount : localStorage.getItem("projectsCount")
+            artsCount : 1
         }
     }
     componentDidMount(): void {
@@ -33,7 +31,7 @@ class Project extends Component<Props, State>{
                 <textarea style={{float: "right"}} name="" maxLength={600} placeholder='Add description'></textarea>
             </div>
             <div>
-                <UploadImage uploadType='upload' projectCount={this.state.projectCount}/>
+                <UploadImage uploadType='upload' projectNumber={0} imageNumber={0}/>
                 <input id="set-artwork-title" type="text" placeholder='Title of this artwork' />
                 <img id="set-artwork-title" src={arrowUp} />
             </div>
@@ -42,9 +40,7 @@ class Project extends Component<Props, State>{
             </div>
         </div>);
     }
-
     handleTextareaChange = (e: any) => {
-
     }
 
     render() {
@@ -61,7 +57,7 @@ class Project extends Component<Props, State>{
                         <div className='centered'>
                             <img src={logoStatic} id="logo-static"/>
                         </div>
-                        <h1 className='centered'>{this.state.projectCount}</h1>
+                        <h1 className='centered'></h1>
                         <hr />
                         <div className="centered">
                             <input type="text" placeholder='Project title'/>
@@ -72,8 +68,7 @@ class Project extends Component<Props, State>{
                     <h1>3</h1>
                 </div>
             </div>
-            {this.addNewArt()}
-            <button onClick={()=> {this.setState({artsCount: this.state.artsCount+1})}}>Add new</button>
+            <this.addNewArt/>
         </div>
         )
     }

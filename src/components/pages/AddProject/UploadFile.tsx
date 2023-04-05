@@ -7,14 +7,14 @@ interface IState {
 
 interface Props{
     uploadType: string;
-    projectCount: number;
+    projectNumber: number;
+    imageNumber: number;
 }
 
 
-class UploadImage extends Component<Props, IState>{
+export class UploadImage extends Component<Props, IState>{
     handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({file : e.target.files!})
-        console.log(this.props.projectCount)
     }
     
     handleUploadClick = () => {
@@ -29,7 +29,7 @@ class UploadImage extends Component<Props, IState>{
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9)
         let fileName = JSON.stringify(jwt_decoded['id'])
         const ext = re.exec(this.state.file[0].name)![1]
-        data.append('file', this.state.file[0], `${fileName}-${uniqueSuffix}.${ext}`)
+        data.append('file', this.state.file[0], `${fileName}-${this.props.projectNumber}-${this.props.imageNumber}-${uniqueSuffix}.${ext}`)
         fetch(`http://localhost:3000/${this.props.uploadType}`, {
             method: 'POST',
             body: data
@@ -38,12 +38,15 @@ class UploadImage extends Component<Props, IState>{
 
     render() {
         return(
+        <>
             <div className="upload-file-container">
                 <input type="file" id='imgUpload'
                        accept="image/png, image/jpg, image/gif, image/jpeg"
                        onChange={e => {this.handleFileChange(e)}}/>
-                            <p className="allcaps bold">Click to add picture</p>
+                <p className="allcaps bold">Click to add picture</p>
             </div>
+            <button style={{float: "right"}} onClick={this.handleUploadClick}>Save</button>
+        </>
         )
     }
 }

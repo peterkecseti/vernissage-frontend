@@ -28,6 +28,7 @@ p{
 }
 
 footer{
+  position: absolute;
   background-color: black;
   color: white;
   margin-top: 30px;
@@ -164,14 +165,27 @@ input[type=text], input[type=password]{
 }
 
 #profile-picture{
-  height: 100%;
+  height: 150px;
+  width: 150px;
+}
+.profile-picture-container:hover{
+  transition: .1s;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.3);  
+}
+.profile-picture-container{
   border-radius: 25px 0px 0px 25px;
-  float: left;
+  height: 150px;
+  width: 150px;
   margin-right: 25px;
+  float: left;
+}
+.profile-picture-container input{
+  opacity: 0;
 }
 
 .about-container p{
   font-size: 15px;
+  user-select: none;
 }
 
 .about-container hr{
@@ -203,14 +217,14 @@ input[type=text], input[type=password]{
 #create-project{
   border-color: #00919d;
   background-image: url('../src/assets/profile/add_project.png');
-  background-size: contain;
+  background-size:cover;
 }
 
 #create-project:hover{
   border-color: #00919d;
   background-color: #00919d;
   background-image: url('../src/assets/profile/add_project_hover.png');
-  background-size: contain;
+  background-size: cover;
   transition: .1s;
 }
 

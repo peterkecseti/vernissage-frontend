@@ -3,11 +3,8 @@ import React, {Component, FormEvent} from 'react'
 import jwt_decode from 'jwt-decode'
 
 interface State{
-    firstName: string;
-    lastName: string;
     email: string;
     password: string;
-    token: any;
 }
 interface LoginProps{
 
@@ -16,15 +13,13 @@ class Login extends Component<LoginProps, State>{
     constructor(props: LoginProps) {
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
             email: '',
             password: '',
-            token: ''
         }
     }
 
     handleLogin = async (e: FormEvent) => {
+        localStorage.clear()
         e.preventDefault();
         const loginData = {
             'email': this.state.email,
@@ -40,34 +35,16 @@ class Login extends Component<LoginProps, State>{
         });
         
         const responseBody = await response.json();
-        this.setState({token: responseBody.token})
-        const userdata : any = jwt_decode(this.state.token)
-        const toLocalStorage = {
-            firstName: userdata['firstName'],
-            lastName: userdata['lastName'],
-            email: userdata['email'],
-            studies: userdata['studies'],
-            occupation: userdata['occupation'],
-            workExperience: userdata['workExperience'],
-            aboutMe: userdata['aboutMe'],
-            projectsCount: userdata['projectsCount']
-        }
+        const userdata : any = jwt_decode(responseBody.token)
         
-        /* ezt még fel kell rakni localstorageba */
-        localStorage.setItem('userdataJson', JSON.stringify(toLocalStorage))
-
-        this.setState({
-            firstName: userdata['firstName'],
-            lastName : userdata['lastName'],
-            email: userdata['email']
-        })
+        localStorage.setItem('userid', userdata['id'])
+        alert(localStorage.getItem('userid'))
         
-        localStorage.setItem('authToken', responseBody.token);
         this.setState({
             email: '',
             password: '',
         })
-        window.alert(localStorage.getItem('authToken'))
+
         // this.props.onAuthTokenChange(responseBody.token);
     }
 

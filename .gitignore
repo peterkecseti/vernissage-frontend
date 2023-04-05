@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+src/assets/vernissage02.mp4
 
 # testing
 /coverage
