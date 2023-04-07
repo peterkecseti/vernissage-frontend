@@ -307,3 +307,8 @@ textarea::-webkit-scrollbar{
   position: relative;
   height: 150px;
 }
+
+.edit-hover:hover{
+  color: #808080;
+  transition: .2s;
+}

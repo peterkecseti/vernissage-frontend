@@ -21,7 +21,12 @@ export interface State{
     aboutMe: string,
     projectsCount: number,
     profilePicture: string,
-    updateProfilePicture?: FileList
+
+    updateProfilePicture?: FileList,
+    updateStudies: string,
+    updateOccupation: string,
+    updateWorkExperience: string,
+    updateAboutMe: string
 }
 
 interface Props{
@@ -41,8 +46,12 @@ class Profile extends Component<Props, State>{
             workExperience: '',
             aboutMe: '',
             projectsCount: 0,
-            profilePicture: "",
-            updateProfilePicture: undefined
+            profilePicture: '',
+            updateProfilePicture: undefined,
+            updateStudies: '',
+            updateOccupation: '',
+            updateWorkExperience: '',
+            updateAboutMe: ''
         }
     }
     componentDidMount(): void {
@@ -57,7 +66,7 @@ class Profile extends Component<Props, State>{
         setTimeout(this.handleUpdate, 1000)
     }
 
-    handleUpdate = () => {
+    handleUpdate = async () => {
         console.log("fentvan elv")
         console.log(this.state.updateProfilePicture)
         if(!this.state.updateProfilePicture){
@@ -69,11 +78,10 @@ class Profile extends Component<Props, State>{
         const ext = re.exec(this.state.updateProfilePicture[0].name)![1]
         const filename = `${this.state.userid}-0-0-0.${ext}`
         data.append('file', this.state.updateProfilePicture[0], filename)
-        fetch(`http://localhost:3000/upload`, {
+        await fetch(`http://localhost:3000/upload`, {
             method: 'POST',
             body: data
-        })
-        setTimeout(()=>{window.location.reload()}, 1000)
+        }).then(()=>{this.loadUserDetailsFromDatabase()})
         
     }
     loadUserDetailsFromDatabase = async() => {
@@ -100,11 +108,29 @@ class Profile extends Component<Props, State>{
             projectsCount : responseBody.projectsCount,
             profilePicture: responseBody.profilePicture
         })
+            alert(this.state.workExperience)
     }
     
-    handleInputDoubleclick = () => {
+    handleInputDoubleclick = async() => {
         this.setState({showInput : !this.state.showInput})
         console.log(this.state.showInput)
+        if(!this.state.showInput){
+            const updateData = {
+                userid: this.state.userid,
+                updateStudies: this.state.updateStudies,
+                updateOccupation: this.state.updateOccupation,
+                updateWorkExperience: this.state.updateWorkExperience,
+                updateAboutMe: this.state.updateAboutMe
+            }
+
+            await fetch('http://localhost:3000/updateProfileDetails', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(updateData)
+        }).then(()=>{this.loadUserDetailsFromDatabase()});
+        }
     }
 
     render() {
@@ -123,28 +149,57 @@ class Profile extends Component<Props, State>{
                 <div className="about-container">
                     <p className='bold'>Studies</p>
                     {this.state.showInput ? (
-                        <p onDoubleClick={this.handleInputDoubleclick}>
-                        {this.state.studies ? this.state.studies : "Not given"} 
+                        <p className='edit-hover'
+                           onDoubleClick={this.handleInputDoubleclick}>
+                            {this.state.studies ? this.state.studies : "Not given - double click to edit"}
                         </p>
                     ) : (
-                        <input type="text" placeholder={this.state.studies} onDoubleClick={this.handleInputDoubleclick} />
+                        <input type="text"
+                               placeholder="double click to save"
+                               onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
+                               onChange={(e)=>{this.setState({updateStudies : e.target.value})}}/>
                     )}
                     
                     <hr />
                     <p className='bold'>Occupation</p>
-                    <p>
-                        {this.state.occupation ? this.state.occupation : "Not given"}</p> {/* ! */}  {/* ! */}
+                    {this.state.showInput ? (
+                        <p className='edit-hover'
+                           onDoubleClick={this.handleInputDoubleclick}>
+                            {this.state.occupation ? this.state.occupation : "Not given - double click to edit"}
+                        </p>
+                    ) : (
+                        <input type="text"
+                               placeholder="double click to save"
+                               onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
+                               onChange={(e)=>{this.setState({updateOccupation : e.target.value})}}/>
+                    )}
                     <hr />
                     <p className='bold'>Work experience</p>
-                    <p>
-                        {this.state.workExperience ? this.state.workExperience : "Not given"}
-                    </p> {/* ! */}
+                    {this.state.showInput ? (
+                        <p className='edit-hover'
+                           onDoubleClick={this.handleInputDoubleclick}>
+                            {this.state.workExperience ? this.state.workExperience : "Not given - double click to edit"}
+                        </p>
+                    ) : (
+                        <input type="text"
+                               placeholder="double click to save"
+                               onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
+                               onChange={(e)=>{this.setState({updateWorkExperience : e.target.value})}}/>
+                    )}
                 </div>
                 <hr />
                     <p className="bold">A few words about me</p>
-                    <p className="content"> {/* ! */}
-                        {this.state.aboutMe ? this.state.aboutMe : "Not given"}
-                    </p>
+                    {this.state.showInput ? (
+                        <p className='edit-hover'
+                           onDoubleClick={this.handleInputDoubleclick}>
+                            {this.state.aboutMe ? this.state.aboutMe : "Not given - double click to edit"}
+                        </p>
+                    ) : (
+                        <input type="text"
+                               placeholder="double click to save"
+                               onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
+                               onChange={(e)=>{this.setState({updateAboutMe : e.target.value})}}/>
+                    )}
                 <hr />
                     <div className="projects-container">
                         <Link className="project" id="create-project" to="/project">
