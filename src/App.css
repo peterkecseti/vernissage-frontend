@@ -183,6 +183,7 @@ input[type=text], input[type=password]{
   opacity: 0;
 }
 
+
 .about-container p{
   font-size: 15px;
   user-select: none;
@@ -196,21 +197,18 @@ input[type=text], input[type=password]{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
+  margin-bottom: 20px;
 }
 
-.project:nth-child(1){
+.project.rounded-top-left{
   border-radius: 25px 0px 0px 0px;
 }
 
-.project:nth-child(3){
+.project.rounded-top-right{
   border-radius: 0px 25px 0px 0px;
 }
 
-.project:nth-child(3){
-  border-radius: 0px 25px 0px 0px;
-}
-
-.project:nth-last-child(3){
+.project.rounded-bottom-left{
   border-radius: 0px 0px 0px 25px;
 }
 
@@ -218,6 +216,7 @@ input[type=text], input[type=password]{
   border-color: #00919d;
   background-image: url('../src/assets/profile/add_project.png');
   background-size:cover;
+  height: 10.5vw;
 }
 
 #create-project:hover{
@@ -231,7 +230,7 @@ input[type=text], input[type=password]{
 .project{
   border: 5px solid black;
   width: 100%;
-  height: 150px;
+  height: 10.5vw;
 }
 
 .project-container{
@@ -257,7 +256,6 @@ input[type=text], input[type=password]{
 }
 .upload-file-container{
   background-color: white;
-  margin-top: 20px;
   text-align: center;
 }
 .upload-file-container p{
@@ -265,6 +263,13 @@ input[type=text], input[type=password]{
   font-size: 10px;
   letter-spacing: 2px;
   font-weight: bold;
+}
+
+.create-project-tags{
+  width: 100%;
+  height: 15vw;
+  background-color: white;
+  margin-left: 15px;
 }
 
 #set-artwork-title{
@@ -311,4 +316,12 @@ textarea::-webkit-scrollbar{
 .edit-hover:hover{
   color: #808080;
   transition: .2s;
+}
+
+#update-profile{
+  border: none;
+  width: 50%;
+  margin: none;
+  padding: 0;
+  height: 12px;
 }

@@ -36,7 +36,9 @@ class Project extends Component<Props, State>{
                 <img id="set-artwork-title" src={arrowUp} />
             </div>
             <div>
-                <textarea style={{float: "left"}} name="" maxLength={600} placeholder='Add description'></textarea>
+                <div className='create-project-tags'>
+                    <p>Create project tags</p>
+                </div>
             </div>
         </div>);
     }

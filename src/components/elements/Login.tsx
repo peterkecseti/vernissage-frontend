@@ -1,6 +1,7 @@
 // Module imports
 import React, {Component, FormEvent} from 'react'
 import jwt_decode from 'jwt-decode'
+import { redirect } from 'react-router-dom';
 
 interface State{
     email: string;
@@ -38,13 +39,14 @@ class Login extends Component<LoginProps, State>{
         const userdata : any = jwt_decode(responseBody.token)
         
         localStorage.setItem('userid', userdata['id'])
-        alert(localStorage.getItem('userid'))
+
+        
         
         this.setState({
             email: '',
             password: '',
         })
-
+        redirect("/profile")
         // this.props.onAuthTokenChange(responseBody.token);
     }
 

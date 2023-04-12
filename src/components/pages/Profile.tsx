@@ -21,6 +21,9 @@ export interface State{
     aboutMe: string,
     projectsCount: number,
     profilePicture: string,
+    roundedBottom: number,
+
+    projects: any[],
 
     updateProfilePicture?: FileList,
     updateStudies: string,
@@ -51,14 +54,19 @@ class Profile extends Component<Props, State>{
             updateStudies: '',
             updateOccupation: '',
             updateWorkExperience: '',
-            updateAboutMe: ''
+            updateAboutMe: '',
+            projects: [],
+            roundedBottom: 0
         }
     }
     componentDidMount(): void {
         if(!localStorage.getItem('userid')){
             alert("Please log in first")
+            console.log(localStorage.getItem('userid'))
         }
         this.loadUserDetailsFromDatabase();
+
+        
     }
 
     updateProfilePictureFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -67,8 +75,6 @@ class Profile extends Component<Props, State>{
     }
 
     handleUpdate = async () => {
-        console.log("fentvan elv")
-        console.log(this.state.updateProfilePicture)
         if(!this.state.updateProfilePicture){
             return;
         }
@@ -103,12 +109,32 @@ class Profile extends Component<Props, State>{
             lastName: responseBody.lastName,
             studies: responseBody.studies,
             occupation: responseBody.occupation,
-            workExperience: responseBody.workExperinece,
+            workExperience: responseBody.workExperience,
             aboutMe: responseBody.aboutMe,
             projectsCount : responseBody.projectsCount,
             profilePicture: responseBody.profilePicture
         })
-            alert(this.state.workExperience)
+        this.loadProjects();
+    }
+
+    loadProjects = () => {
+        let projectsList = [];
+        if(this.state.projectsCount % 3 === 2){
+            this.setState({roundedBottom: this.state.projectsCount - 2})
+        }
+        if(this.state.projectsCount % 3 === 1){
+            this.setState({roundedBottom: this.state.projectsCount - 1})
+        }
+        if(this.state.projectsCount % 3 === 0){
+            this.setState({roundedBottom: this.state.projectsCount})
+        }
+        for(let i = 0; i < this.state.projectsCount; i++){
+            projectsList.push(<div className={`project ${i === 0 ? 'rounded-top-left' : ''}
+                                                       ${i === 2 ? 'rounded-top-right' : ''}
+                                                       ${i === this.state.roundedBottom ? 'rounded-bottom-left' : ''}`} key={i}>{i}</div>)
+        }
+        this.setState({projects: projectsList})
+        
     }
     
     handleInputDoubleclick = async() => {
@@ -156,6 +182,7 @@ class Profile extends Component<Props, State>{
                     ) : (
                         <input type="text"
                                placeholder="double click to save"
+                               id="update-profile"
                                onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
                                onChange={(e)=>{this.setState({updateStudies : e.target.value})}}/>
                     )}
@@ -169,6 +196,7 @@ class Profile extends Component<Props, State>{
                         </p>
                     ) : (
                         <input type="text"
+                               id="update-profile"
                                placeholder="double click to save"
                                onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
                                onChange={(e)=>{this.setState({updateOccupation : e.target.value})}}/>
@@ -182,6 +210,7 @@ class Profile extends Component<Props, State>{
                         </p>
                     ) : (
                         <input type="text"
+                               id="update-profile"
                                placeholder="double click to save"
                                onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
                                onChange={(e)=>{this.setState({updateWorkExperience : e.target.value})}}/>
@@ -196,17 +225,19 @@ class Profile extends Component<Props, State>{
                         </p>
                     ) : (
                         <input type="text"
+                               id="update-profile"
                                placeholder="double click to save"
                                onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
                                onChange={(e)=>{this.setState({updateAboutMe : e.target.value})}}/>
                     )}
                 <hr />
                     <div className="projects-container">
+                        {this.state.projects}
                         <Link className="project" id="create-project" to="/project">
                         </Link>
                     </div>
             </div>
-            <Footer/>
+            {/* <Footer/> */}
         </div>
         )
     }
