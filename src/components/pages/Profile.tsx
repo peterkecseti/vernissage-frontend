@@ -91,6 +91,7 @@ class Profile extends Component<Props, State>{
         
     }
     loadUserDetailsFromDatabase = async() => {
+
         const requestData = {
             'userid': this.state.userid
         };

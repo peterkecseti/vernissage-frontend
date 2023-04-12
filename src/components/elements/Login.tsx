@@ -1,25 +1,30 @@
 // Module imports
 import React, {Component, FormEvent} from 'react'
 import jwt_decode from 'jwt-decode'
-import { redirect } from 'react-router-dom';
+import withRouter from '../withRouter';
+import { NavigateFunction } from 'react-router-dom';
 
 interface State{
     email: string;
     password: string;
+    loginMessage: string;
 }
 interface LoginProps{
-
+    navigate: NavigateFunction;
 }
+
 class Login extends Component<LoginProps, State>{
     constructor(props: LoginProps) {
         super(props);
         this.state = {
             email: '',
             password: '',
+            loginMessage: ''
         }
     }
 
     handleLogin = async (e: FormEvent) => {
+        
         localStorage.clear()
         e.preventDefault();
         const loginData = {
@@ -36,18 +41,19 @@ class Login extends Component<LoginProps, State>{
         });
         
         const responseBody = await response.json();
+        if(!responseBody.token){
+            this.setState({loginMessage: "Invalid email or password"})
+            return
+        }
         const userdata : any = jwt_decode(responseBody.token)
         
         localStorage.setItem('userid', userdata['id'])
-
-        
         
         this.setState({
             email: '',
             password: '',
         })
-        redirect("/profile")
-        // this.props.onAuthTokenChange(responseBody.token);
+        this.props.navigate("/profile")
     }
 
     render() {
@@ -59,6 +65,7 @@ class Login extends Component<LoginProps, State>{
                     <input placeholder='Password' type="password" onChange={(e) => this.setState({ password: e.target.value })}/>
                     <br />
                     <input type="submit" value="Continue" />
+                    <p id="login-message">{this.state.loginMessage}</p>
                 </form>
             </div>
         )
@@ -66,4 +73,4 @@ class Login extends Component<LoginProps, State>{
 }
 
 
-export default Login;
+export default withRouter(Login);
