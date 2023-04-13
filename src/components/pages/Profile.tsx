@@ -26,10 +26,6 @@ export interface State{
     projects: any[],
 
     updateProfilePicture?: FileList,
-    updateStudies: string,
-    updateOccupation: string,
-    updateWorkExperience: string,
-    updateAboutMe: string
 }
 
 interface Props{
@@ -51,10 +47,7 @@ class Profile extends Component<Props, State>{
             projectsCount: 0,
             profilePicture: '',
             updateProfilePicture: undefined,
-            updateStudies: '',
-            updateOccupation: '',
-            updateWorkExperience: '',
-            updateAboutMe: '',
+
             projects: [],
             roundedBottom: 0
         }
@@ -144,10 +137,10 @@ class Profile extends Component<Props, State>{
         if(!this.state.showInput){
             const updateData = {
                 userid: this.state.userid,
-                updateStudies: this.state.updateStudies,
-                updateOccupation: this.state.updateOccupation,
-                updateWorkExperience: this.state.updateWorkExperience,
-                updateAboutMe: this.state.updateAboutMe
+                updateStudies: this.state.studies,
+                updateOccupation: this.state.occupation,
+                updateWorkExperience: this.state.workExperience,
+                updateAboutMe: this.state.aboutMe
             }
 
             await fetch('http://localhost:3000/updateProfileDetails', {
@@ -162,8 +155,10 @@ class Profile extends Component<Props, State>{
 
     render() {
         return(
-        <div className='container centered'>
-            <img src={logoStatic} alt="Profile picture" id="logo-static"/>
+        <div className='container centered profile-text'>
+            <Link to="/">
+                <img src={logoStatic} alt="Profile picture" id="logo-static"/>
+            </Link>
             <div className='profile-container'>
                 <h1>{this.state.firstName} {this.state.lastName}</h1> {/* ! */}
                 <hr />
@@ -174,7 +169,7 @@ class Profile extends Component<Props, State>{
                            onChange={this.updateProfilePictureFileChange}/>
                 </div>
                 <div className="about-container">
-                    <p className='bold'>Studies</p>
+                    <p className='bold allcaps'>Studies</p>
                     {this.state.showInput ? (
                         <p className='edit-hover'
                            onDoubleClick={this.handleInputDoubleclick}>
@@ -185,11 +180,11 @@ class Profile extends Component<Props, State>{
                                placeholder="double click to save"
                                id="update-profile"
                                onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
-                               onChange={(e)=>{this.setState({updateStudies : e.target.value})}}/>
+                               onChange={(e)=>{this.setState({studies : e.target.value})}}/>
                     )}
                     
                     <hr />
-                    <p className='bold'>Occupation</p>
+                    <p className='bold allcaps'>Occupation</p>
                     {this.state.showInput ? (
                         <p className='edit-hover'
                            onDoubleClick={this.handleInputDoubleclick}>
@@ -200,10 +195,10 @@ class Profile extends Component<Props, State>{
                                id="update-profile"
                                placeholder="double click to save"
                                onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
-                               onChange={(e)=>{this.setState({updateOccupation : e.target.value})}}/>
+                               onChange={(e)=>{this.setState({occupation : e.target.value})}}/>
                     )}
                     <hr />
-                    <p className='bold'>Work experience</p>
+                    <p className='bold allcaps'>Work experience</p>
                     {this.state.showInput ? (
                         <p className='edit-hover'
                            onDoubleClick={this.handleInputDoubleclick}>
@@ -214,11 +209,12 @@ class Profile extends Component<Props, State>{
                                id="update-profile"
                                placeholder="double click to save"
                                onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
-                               onChange={(e)=>{this.setState({updateWorkExperience : e.target.value})}}/>
+                               onChange={(e)=>{this.setState({workExperience : e.target.value})}}/>
                     )}
                 </div>
                 <hr />
-                    <p className="bold">A few words about me</p>
+                    <p className="bold allcaps">A few words about me</p>
+                    <br />
                     {this.state.showInput ? (
                         <p className='edit-hover'
                            onDoubleClick={this.handleInputDoubleclick}>
@@ -229,7 +225,7 @@ class Profile extends Component<Props, State>{
                                id="update-profile"
                                placeholder="double click to save"
                                onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
-                               onChange={(e)=>{this.setState({updateAboutMe : e.target.value})}}/>
+                               onChange={(e)=>{this.setState({aboutMe : e.target.value})}}/>
                     )}
                 <hr />
                     <div className="projects-container">

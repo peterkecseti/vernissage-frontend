@@ -22,7 +22,9 @@ class Search extends Component<Props, State>{
                 <form className='login-form centered'>
                     <input placeholder='Type artist name here' type="text"/>
                     <br />
-                    <input type="submit" value="Continue" />
+                    <div className="submit-button-container centered">
+                        <input type="submit" value="Continue" />
+                    </div>
                 </form>
             </div>
         )

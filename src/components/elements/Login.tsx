@@ -4,6 +4,7 @@ import jwt_decode from 'jwt-decode'
 import withRouter from '../withRouter';
 import { NavigateFunction } from 'react-router-dom';
 
+
 interface State{
     email: string;
     password: string;
@@ -64,7 +65,9 @@ class Login extends Component<LoginProps, State>{
                     <br />
                     <input placeholder='Password' type="password" onChange={(e) => this.setState({ password: e.target.value })}/>
                     <br />
-                    <input type="submit" value="Continue" />
+                    <div className="submit-button-container centered">
+                        <input type="submit" value="Continue" />
+                    </div>
                     <p id="login-message">{this.state.loginMessage}</p>
                 </form>
             </div>

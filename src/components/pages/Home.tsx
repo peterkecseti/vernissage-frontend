@@ -45,7 +45,7 @@ class Home extends Component<Props, State>{
                     <div id="form-nav" className='centered'>
                         <ul>
                             <li id={(this.state.selected === 0) ? 'selected' : ''} onClick={()=>{this.setState({selected : 0})}}>
-                                Login
+                                Log in
                             </li>
                             <li id={(this.state.selected === 1) ? 'selected' : ''} onClick={()=>{this.setState({selected : 1})}}>
                                 Register

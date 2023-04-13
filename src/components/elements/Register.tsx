@@ -89,7 +89,9 @@ class Register extends Component<Props, State>{
                     <br />
                     <input placeholder='Password again' type="password" onChange={e=> this.setState({ passwordAgainInput: e.currentTarget.value})}/>
                     <br />
-                    <input type="submit" value="Continue" />
+                    <div className="submit-button-container centered">
+                        <input type="submit" value="Continue" />
+                    </div>
                 </form>
             </div>
         )
