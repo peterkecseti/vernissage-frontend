@@ -8,19 +8,25 @@ import { NavigateFunction } from 'react-router-dom';
 interface State{
     email: string;
     password: string;
-    loginMessage: string;
+    responseMessage: string;
 }
-interface LoginProps{
-    navigate: NavigateFunction;
+export interface LoginProps{
+    
+    responseMessage: string;
 }
 
-class Login extends Component<LoginProps, State>{
-    constructor(props: LoginProps) {
+interface LoginComponentProps {
+    onChildProps: (childProps: LoginProps) => void;
+    navigate: NavigateFunction;
+  }
+
+class Login extends Component<LoginComponentProps, State>{
+    constructor(props: LoginComponentProps) {
         super(props);
         this.state = {
             email: '',
             password: '',
-            loginMessage: ''
+            responseMessage: ''
         }
     }
 
@@ -43,7 +49,10 @@ class Login extends Component<LoginProps, State>{
         
         const responseBody = await response.json();
         if(!responseBody.token){
-            this.setState({loginMessage: "Invalid email or password"})
+            // this.setState({loginMessage: "Invalid email or password"})
+            this.setState({responseMessage: 'Invalid email or password'})
+            const {responseMessage} = this.state
+            this.props.onChildProps({responseMessage})
             return
         }
         const userdata : any = jwt_decode(responseBody.token)
@@ -68,7 +77,6 @@ class Login extends Component<LoginProps, State>{
                     <div className="submit-button-container centered">
                         <input type="submit" value="Continue" />
                     </div>
-                    <p id="login-message">{this.state.loginMessage}</p>
                 </form>
             </div>
         )

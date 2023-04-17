@@ -30,9 +30,15 @@ function ProfileOthers() {
     }, [id]);
   
     useEffect(() => {
-      if (data) {
+      if (data.projectsCount) {
         loadProjects();
+        return
       }
+      const err = []
+      err.push(<div></div>)
+      err.push(<h3 style={{textAlign: 'center'}}>No projects available to show.</h3>)
+      setProjectsList(err)
+      console.log(err)
     }, [data]);
   
     async function loadProjects() {
@@ -61,7 +67,7 @@ function ProfileOthers() {
     }
 
     return <div className="container centered profile-text">
-        <img src={logoStatic} alt="Profile picture" id="logo-static"/>
+        <img src={logoStatic} alt="logo" id="logo-static"/>
             <div className='profile-container'>
                 <h1>{data?.firstName} {data?.lastName}</h1> {/* ! */}
                 <hr />
@@ -90,7 +96,6 @@ function ProfileOthers() {
                             {data?.aboutMe ? data?.aboutMe : "Not given"}
                         </p>
                 <hr />
-
                     <div className="projects-container">
                         {projectsList}
                     </div>

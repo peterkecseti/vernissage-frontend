@@ -38,8 +38,16 @@ footer{
   width: 100%;
 }
 
+/* .purge > *{
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  display: block !important;
+} */
+
 #logo-static{
-  width: 100px;
+  width: 100px; 
   margin-top: 20px;
 }
 
@@ -82,6 +90,49 @@ footer{
   width: 100%;
   height: 100%;
   text-align: center;
+}
+
+.scrollbar-center{
+  margin-top: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scrollbar-container{
+  overflow-y: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.scrollbar-item{
+  margin-left: 10px;
+  margin-right: 10px;
+  min-width: 150px;
+  height: 150px;
+  border: 5px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scrollbar-item-username{
+  font-weight: bold;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.scrollbar-item:first-child{
+  border-radius: 25px 0 0 25px;
+}
+
+.scrollbar-item:last-child{
+  border-radius: 0 25px 25px 0;
 }
 
 .forms-container{
@@ -137,24 +188,28 @@ input[type=text], input[type=password]{
   border-bottom: 2px solid black;
   background-color: transparent;
   margin-bottom: 0px;
-  text-transform: uppercase;
-  font-size: 10px;
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: 2px;
 }
+input[type=text]::placeholder, input[type=password]::placeholder{
+  text-transform: uppercase;
+  font-size: 10px;
+}
 
-.login-form input[type=submit]{
+.login-form input[type=submit], .submit-button{
   background-color: black;
   color: white;
   border: none;
   float: right;
   height: 25px;
-  width: 20%;
+  width: 10vh;
   margin-top: 0;
 }
 
-.login-form input[type=submit]:hover{
+.login-form input[type=submit]:hover, .submit-button:hover{
   background-color: #00919d;
+  transition: .1s;
 }
 
 .submit-button-container{
@@ -167,8 +222,9 @@ input[type=text], input[type=password]{
   margin-top: none !important;
 }
 
-#login-message{
+#response-message{
   color: red;
+  display: block;
 }
 
 .profile-container{
