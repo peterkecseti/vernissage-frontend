@@ -30,7 +30,7 @@ class Login extends Component<LoginComponentProps, State>{
     }
 
     handleLogin = async (e: FormEvent) => {
-        
+        this.props.onChildProps({responseMessage: "Logging in..."});
         localStorage.clear()
         e.preventDefault();
         const loginData = {
@@ -48,7 +48,6 @@ class Login extends Component<LoginComponentProps, State>{
         
         const responseBody = await response.json();
         if(!responseBody.token){
-            // this.setState({loginMessage: "Invalid email or password"})
             this.setState({responseMessage: 'Invalid email or password'})
             const {responseMessage} = this.state
             this.props.onChildProps({responseMessage})

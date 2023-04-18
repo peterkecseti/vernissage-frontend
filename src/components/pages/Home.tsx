@@ -22,17 +22,7 @@ class Home extends Component<{}, State>{
             responseMessage : null
         }
     }
-    componentDidMount(): void {
-        
-        const xd = () => {
-            for(let i = 10; i < 20; i++){
-                if(i%2){
-                    console.log(i + ' AAAAAAAAAAAA ' + i % 2)
-                }
-            }
-        }
-        xd()
-    }
+
     handleLoginMessage = (responseMessage: LoginProps) => {
         this.setState({ responseMessage });
     }

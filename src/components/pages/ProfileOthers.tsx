@@ -63,6 +63,7 @@ function ProfileOthers() {
         );
       }
       await setProjectsList(projectsList);
+      console.log(data.profilePicture)
     }
 
     return <div className="container centered profile-text">
