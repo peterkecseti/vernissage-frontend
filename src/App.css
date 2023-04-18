@@ -26,7 +26,10 @@ body{
 p{
   font-size: 15px;
 }
-
+a{
+  text-decoration: none;
+  color: black;
+}
 footer{
   position: absolute;
   background-color: black;
@@ -37,6 +40,7 @@ footer{
   height: 80px;
   width: 100%;
 }
+
 
 /* .purge > *{
   margin: 0 !important;
@@ -101,7 +105,6 @@ footer{
 }
 
 .scrollbar-container{
-  overflow-x: scroll;
   overflow-y: hidden;
   display: inline-flex;
   align-items: center;
@@ -336,13 +339,29 @@ input[type=text]::placeholder, input[type=password]::placeholder{
   font-weight: bold;
   font-size: 13px;
   margin: 5px;
-  letter-spacing: '2px'
+  letter-spacing: 2px
 }
 
 #about-arrow-right{
   width: 70%;
   margin: 5px
 }
+
+#add-button-container{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+#add-art-button{
+  width: 50px;
+  height: 50px;
+  background-image: url('./assets/createProject/addButton.png');
+  background-size: cover;
+  border: 5px solid black;
+  margin: auto;
+}
+
 .create-project-layout{
   margin-top: 20px;
   display: grid;
@@ -420,16 +439,15 @@ input[type=text]::placeholder, input[type=password]::placeholder{
 }
 
 textarea{
-  margin-top: 20px;
-  max-height: 29.6vw;
   border: none;
-  width: 95.1%;
   background-color: transparent;
   border-bottom: 2px solid #808080;
   resize: vertical;
   color: black;
   overflow: auto;
-  padding: 5px;
+  float: right;
+  width: 60%;
+  margin-top: 20px;
 }
 
 textarea::-webkit-scrollbar{

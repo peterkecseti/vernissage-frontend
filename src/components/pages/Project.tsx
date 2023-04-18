@@ -1,13 +1,10 @@
-import { useParams } from "react-router-dom";
+
 import logoStatic from '../../assets/logo_static.png'
-import arrowRight from '../../assets/createProject/arrowRight.png'
-import arrowUp from '../../assets/createProject/arrowUp.png'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ProjectUploader from "./AddProject/ProjectUploader";
 
 function AddProject() {
-    const [projectContent, setProjectContent] = useState([] as any)
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
     const addArt = () => {
         setCount(count + 1);
       };
@@ -26,13 +23,15 @@ function AddProject() {
                     <hr />
                     <input type="text" id="project-biginput" />
                 </div>
-                <div></div> {/* fourth section */}
+                <div>
+                </div> {/* fourth section */}
             </div>
             {[...Array(count)].map((_, i) => (
-                <ProjectUploader key={i} />
+                <ProjectUploader key={i} id={i} />
             ))}
-
-            <button onClick={addArt}>Add art</button>
+            <div id="add-button-container">
+                <div onClick={addArt} id="add-art-button"></div>
+            </div>
     </div>;
   }
 
