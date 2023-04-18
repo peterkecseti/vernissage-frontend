@@ -38,7 +38,6 @@ function ProfileOthers() {
       err.push(<div></div>)
       err.push(<h3 style={{textAlign: 'center'}}>No projects available to show.</h3>)
       setProjectsList(err)
-      console.log(err)
     }, [data]);
   
     async function loadProjects() {

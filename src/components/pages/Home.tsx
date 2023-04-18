@@ -2,8 +2,8 @@
 import React, {Component} from 'react'
 // Element imports
 import Login, { LoginProps } from '../elements/Login'
-import Register from '../elements/Register'
-import Search from '../elements/Search'
+import Register, { RegisterProps } from '../elements/Register'
+import Search, { SearchProps } from '../elements/Search'
 import Footer from '../elements/Footer'
 // Asset imports
 import bgVideo from '../../assets/vernissage02.mp4'
@@ -11,7 +11,7 @@ import logoGif from '../../assets/logo.gif'
 
 interface State{
     selected : number;
-    responseMessage: LoginProps | null;
+    responseMessage: LoginProps | RegisterProps | null;
 }
 
 class Home extends Component<{}, State>{
@@ -22,15 +22,35 @@ class Home extends Component<{}, State>{
             responseMessage : null
         }
     }
-    handleResponseMessage = (responseMessage: LoginProps) => {
+    componentDidMount(): void {
+        
+        const xd = () => {
+            for(let i = 10; i < 20; i++){
+                if(i%2){
+                    console.log(i + ' AAAAAAAAAAAA ' + i % 2)
+                }
+            }
+        }
+        xd()
+    }
+    handleLoginMessage = (responseMessage: LoginProps) => {
+        this.setState({ responseMessage });
+    }
+    
+    handleRegisterMessage = (responseMessage: RegisterProps) => {
+        this.setState({ responseMessage });
+    }
+
+    handleSearchMessage = (responseMessage: SearchProps) => {
         this.setState({ responseMessage });
     }
 
     handleFormChange = () => {
+        // this.setState({responseMessage: null})   
         switch(this.state.selected){
-            case 0: return <Login onChildProps={this.handleResponseMessage}/>
-            case 1: return <Register/>
-            case 2: return <Search/>
+            case 0: return <Login onChildProps={this.handleLoginMessage}/>
+            case 1: return <Register onChildProps={this.handleRegisterMessage}/>
+            case 2: return <Search onChildProps={this.handleSearchMessage}/>
         }
     }
 

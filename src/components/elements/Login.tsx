@@ -11,7 +11,6 @@ interface State{
     responseMessage: string;
 }
 export interface LoginProps{
-    
     responseMessage: string;
 }
 

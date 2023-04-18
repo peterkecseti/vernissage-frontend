@@ -10,7 +10,8 @@ interface State{
     emailInput : string
     passwordInput : string
     passwordAgainInput : string
-    user : User[]
+    user : User[],
+    responseMessage: string
 }
 
 interface User{
@@ -19,12 +20,15 @@ interface User{
     email : string
     password : string
   }
-
-interface Props{
-
+export interface RegisterProps{
+  responseMessage: string
 }
-class Register extends Component<Props, State>{
-    constructor(props: Props) {
+
+export interface RegisterComponentProps {
+  onChildProps: (childProps: { responseMessage: string }) => void;
+}
+class Register extends Component<RegisterComponentProps, State>{
+    constructor(props: RegisterComponentProps) {
     super(props);
     this.state = {
       selected : 0,
@@ -33,17 +37,19 @@ class Register extends Component<Props, State>{
       emailInput : '',
       passwordInput : '',
       passwordAgainInput : '',
-      user : []
+      user : [],
+      responseMessage: ''
         }
     }
     handleUpload = async () => {
-
+        this.props.onChildProps({ responseMessage: "Registration in progress" });
         const { firstNameInput, lastNameInput, emailInput, passwordInput, passwordAgainInput } = this.state;
-        if(firstNameInput.trim() === '' ||
-           lastNameInput.trim()  === '' ||
-           emailInput.trim()     === '' ||
-           passwordInput.length   <   8 ||
-           passwordAgainInput    !== passwordInput){
+        if(firstNameInput.trim() === ''  ||
+            lastNameInput.trim()  === '' ||
+            emailInput.trim()     === '' ||
+            passwordInput.length   <   8 ||
+            passwordAgainInput    !== passwordInput){
+            this.props.onChildProps({ responseMessage: "Register form must be filled correctly" });
           // this.setState()- tel hibaüzenet megjelenítése
           return;
         }
@@ -64,7 +70,7 @@ class Register extends Component<Props, State>{
           body: JSON.stringify(adat),
         });
         console.log(JSON.stringify(adat))
-    
+        this.props.onChildProps({ responseMessage: "Registration successful, please log in" });
         this.setState({ 
           firstNameInput : '',
           lastNameInput : '',
@@ -79,20 +85,20 @@ class Register extends Component<Props, State>{
     render() {
         return(
             <div className="login-form-container">
-                <form className='login-form centered' onSubmit={this.handleUpload}>
-                    <input placeholder='Email' type="text" onChange={e=> this.setState({ emailInput: e.currentTarget.value})}/>
+                <div className='login-form centered' onSubmit={this.handleUpload}>
+                      <input placeholder='Email' type="text" onChange={e=> this.setState({ emailInput: e.currentTarget.value})}/>
                     <br />
-                    <input placeholder='First name' className='input-half' type="text" onChange={e=> this.setState({ firstNameInput: e.currentTarget.value})}/>
-                    <input placeholder='Last name' className='input-half' type="text" onChange={e=> this.setState({ lastNameInput: e.currentTarget.value})}/>
+                      <input placeholder='First name' className='input-half' type="text" onChange={e=> this.setState({ firstNameInput: e.currentTarget.value})}/>
+                      <input placeholder='Last name' className='input-half' type="text" onChange={e=> this.setState({ lastNameInput: e.currentTarget.value})}/>
                     <br />
-                    <input placeholder='Password' type="password"  onChange={e=> this.setState({ passwordInput: e.currentTarget.value})}/>
+                      <input placeholder='Password' type="password"  onChange={e=> this.setState({ passwordInput: e.currentTarget.value})}/>
                     <br />
-                    <input placeholder='Password again' type="password" onChange={e=> this.setState({ passwordAgainInput: e.currentTarget.value})}/>
+                      <input placeholder='Password again' type="password" onChange={e=> this.setState({ passwordAgainInput: e.currentTarget.value})}/>
                     <br />
                     <div className="submit-button-container centered">
-                        <input type="submit" value="Continue" />
+                      <button className="submit-button" onClick={this.handleUpload}>Continue</button>
                     </div>
-                </form>
+                </div>
             </div>
         )
     }

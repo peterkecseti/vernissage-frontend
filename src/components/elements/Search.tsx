@@ -8,12 +8,17 @@ import withRouter from '../withRouter';
 interface State{
     selected : number,
     searchFieldValue: string,
-    searchMessage: string,
     foundUsers: FoundUser[],
     roundedBottom: number,
-    usersHTML: any[]
+    usersHTML: any[],
+    responseMessage: string
 }
-interface Props{
+export interface SearchProps{
+    responseMessage: string
+}
+
+export interface SearchComponentProps{
+    onChildProps: (childProps: SearchProps) => void;
     navigate: NavigateFunction;
 }
 
@@ -22,24 +27,25 @@ interface FoundUser{
     firstName: string;
     lastName: string;
 }
-class Search extends React.Component<Props, State, FoundUser>{
-    constructor(props: Props) {
+class Search extends React.Component<SearchComponentProps, State, FoundUser>{
+    constructor(props: SearchComponentProps) {
         super(props);
         this.state = {
             selected : 0,
             searchFieldValue: '',
-            searchMessage: '',
             foundUsers: [],
             roundedBottom: 0,
-            usersHTML: []
+            usersHTML: [],
+            responseMessage: ''
         }
     }
+
     handleSearch = async () => {
-        this.setState({ searchMessage: 'Searching...' });
+        this.props.onChildProps({responseMessage: 'Searching'})
     
-        if (this.state.searchFieldValue === '') {
-          this.setState({ searchMessage: 'Search field must not be empty' });
-          return;
+        if (this.state.searchFieldValue == '') {
+            this.props.onChildProps({ responseMessage: "Search field must not be empty" });
+            return;
         }
     
         const requestData = { searchTerm: this.state.searchFieldValue };
@@ -53,12 +59,14 @@ class Search extends React.Component<Props, State, FoundUser>{
     
         const responseBody = await response.json();
         if (!responseBody) {
-          this.setState({ searchMessage: 'Search failed' });
+            this.props.onChildProps({responseMessage: "Search failed"});
           return;
+        }
+        if(responseBody.length === 0){
+            this.props.onChildProps({responseMessage: "No results found"});
         }
     
         this.setState({ foundUsers: responseBody });
-        this.setState({ searchMessage: '' });
         console.log(this.state.foundUsers)
         this.loadFoundUsers()
       };
@@ -96,7 +104,6 @@ class Search extends React.Component<Props, State, FoundUser>{
                     <div className="submit-button-container centered">
                         <button className="submit-button" onClick={this.handleSearch}>Continue</button>
                     </div>
-                    <p id="login-message">{this.state.searchMessage}</p>
                 </div>
             </div>
             <div className="scrollbar-center">
