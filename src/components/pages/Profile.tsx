@@ -4,9 +4,7 @@ import React, {ChangeEvent, Component, FormEvent} from 'react'
 import Footer from '../elements/Footer'
 // Asset imports
 import logoStatic from '../../assets/logo_static.png'
-import profilePicture from '../../assets/kzs_lr.jpg'
 import { Link } from 'react-router-dom'
-import { upload } from '@testing-library/user-event/dist/upload'
 
 
 export interface State{
@@ -181,6 +179,7 @@ class Profile extends Component<Props, State>{
                         <input type="text"
                                placeholder="double click to save"
                                id="update-profile"
+                               value={this.state.studies}
                                onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
                                onChange={(e)=>{this.setState({studies : e.target.value})}}/>
                     )}
@@ -193,11 +192,16 @@ class Profile extends Component<Props, State>{
                             {this.state.occupation ? this.state.occupation : "Not given - double click to edit"}
                         </p>
                     ) : (
+                        <div>    
                         <input type="text"
                                id="update-profile"
                                placeholder="double click to save"
+                               value={this.state.occupation}
                                onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
                                onChange={(e)=>{this.setState({occupation : e.target.value})}}/>
+                        <button>delete</button>
+                        
+                        </div>
                     )}
                     <hr />
                     <p className='bold allcaps'>Work experience</p>
@@ -210,6 +214,7 @@ class Profile extends Component<Props, State>{
                         <input type="text"
                                id="update-profile"
                                placeholder="double click to save"
+                               value={this.state.workExperience}
                                onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
                                onChange={(e)=>{this.setState({workExperience : e.target.value})}}/>
                     )}
@@ -226,6 +231,7 @@ class Profile extends Component<Props, State>{
                         <input type="text"
                                id="update-profile"
                                placeholder="double click to save"
+                               value={this.state.aboutMe}
                                onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
                                onChange={(e)=>{this.setState({aboutMe : e.target.value})}}/>
                     )}
@@ -237,6 +243,7 @@ class Profile extends Component<Props, State>{
                     </div>
             </div>
             {/* <Footer/> */}
+            <Footer></Footer>
         </div>
         )
     }

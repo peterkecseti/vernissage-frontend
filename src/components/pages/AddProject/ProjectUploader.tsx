@@ -12,7 +12,15 @@ export interface ProjectContent {
 function ProjectUploader(props: {id: any}){
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-
+    const [imageUrl, setImageUrl] = useState<string | null>(null);
+    const [displayUploaderCaption, setDisplayUploaderCaption] = useState<string | null>(null);
+    const [previewImageStyleState, setPreviewImageStylesState] = useState<string | null>(null);
+    const uploaderCaptionStyle = {
+        display: `${displayUploaderCaption}`
+    }
+    const previewImageStyle = {
+        display: `${previewImageStyleState}`
+    }
 
     const handleImageTitleUpdate = () => {
         updateData( props.id, description, title)
@@ -30,6 +38,18 @@ function ProjectUploader(props: {id: any}){
         handleImageTitleUpdate()
         // setTitleValue(event.target.value)
     }
+
+    function handleImageChange(id: number, event: React.ChangeEvent<HTMLInputElement>) {
+        handleFileInputChange(id, event)
+        if(event.target.files){
+            const file = event.target.files[0];
+            const url = URL.createObjectURL(file);
+            setImageUrl(url);
+            setDisplayUploaderCaption("none")
+            setPreviewImageStylesState("block")
+        }
+        
+      }
       
     return(
         <div>
@@ -44,8 +64,9 @@ function ProjectUploader(props: {id: any}){
                     <img src={arrowRight} alt="" id="about-arrow-right" />
                 </div>
                 <div className="upload-file-container">
-                    <input type="file"  accept="image/png, image/jpeg" onChange={(event) => handleFileInputChange(props.id, event)}/>
-                    <p className="allcaps">Click to upload image</p>
+                    <img style={previewImageStyle} src={imageUrl!} alt="" />
+                    <input type="file"  accept="image/png, image/jpeg" onChange={(event) => handleImageChange(props.id, event)}/>
+                    <p className="allcaps" style={uploaderCaptionStyle}>Click to upload image</p>
                 </div>
             </div>
             <div className="create-project-layout">

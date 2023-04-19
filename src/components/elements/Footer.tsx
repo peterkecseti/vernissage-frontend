@@ -8,9 +8,11 @@ import logoWhite from '../../assets/logo_white.png'
 class Footer extends Component<{}>{
     render() {
         return(
-            <footer>
-                <img src={logoWhite} alt="" id="logo-white" />
-            </footer>
+
+                <footer>
+                    <img src={logoWhite} alt="" id="logo-white" />
+                </footer>
+
         )
     }
 }

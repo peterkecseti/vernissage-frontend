@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import ProjectUploader from "./AddProject/ProjectUploader";
 import { handleProjectTitleChange } from './AddProject/ProjectDataHandler';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../elements/Footer';
 // import { getName } from './AddProject/ProjectDataHandler';
 
 function AddProject() {
@@ -53,6 +54,7 @@ function AddProject() {
                 <ProjectUploader key={i} id={i} />
             ))}
             <div id="add-art-button" ref={bottom} onClick={addArt} />
+            <Footer></Footer>
     </div>;
   }
 

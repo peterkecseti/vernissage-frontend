@@ -23,6 +23,10 @@ body{
   background-attachment: fixed;
 }
 
+body::-webkit-scrollbar{
+  display: none;
+}
+
 p{
   font-size: 15px;
 }
@@ -31,14 +35,15 @@ a{
   color: black;
 }
 footer{
-  position: absolute;
   background-color: black;
   color: white;
+  margin: auto;
   margin-top: 30px;
   left: 0;
   bottom: 0;
   height: 80px;
   width: 100%;
+  text-align: center;
 }
 
 
@@ -288,7 +293,6 @@ input[type=text]::placeholder, input[type=password]::placeholder{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  margin-bottom: 20px;
 }
 
 .project.rounded-top-left{
@@ -411,7 +415,8 @@ input::placeholder#biginput{
 .upload-file-container{
   background-color: white;
   opacity: 0.8;
-  height: 350px;
+  height: auto;
+  min-height: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -421,7 +426,10 @@ input::placeholder#biginput{
   box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.3);  
   transition: .1s;
 }
-
+.upload-file-container img{
+  width: 100%;
+  display: none;
+}
 .upload-file-container input{
   position: absolute;
   width: 50%;
@@ -478,6 +486,10 @@ textarea::-webkit-scrollbar{
 #update-profile{
   border: none;
   width: 50%;
-  margin: none;
+  margin: 0;
   padding: 0;
+}
+
+input::placeholder#update-profile{
+  color: red;
 }
