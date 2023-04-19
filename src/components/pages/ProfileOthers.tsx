@@ -51,14 +51,12 @@ function ProfileOthers() {
       for (let i = 0; i < data?.projectsCount; i++) {
         projectsList.push(
           <div
-            className={`project ${
-              i === 0 ? "rounded-top-left" : ""
-            } ${i === 2 ? "rounded-top-right" : ""} ${
-              i === data?.roundedBottom ? "rounded-bottom-left" : ""
-            }`}
+            className={`project
+              ${i === 0 ? "rounded-top-left" : ""}
+              ${i === 2 ? "rounded-top-right" : ""}
+              ${i === data?.roundedBottom ? "rounded-bottom-left" : ""}`}
             key={i}
           >
-            {i}
           </div>
         );
       }

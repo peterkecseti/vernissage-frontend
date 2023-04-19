@@ -108,6 +108,8 @@ class Profile extends Component<Props, State>{
             projectsCount : responseBody.projectsCount,
             profilePicture: responseBody.profilePicture
         })
+        localStorage.setItem('projectsCount', this.state.projectsCount.toString())
+        localStorage.setItem('userdata', JSON.stringify(responseBody))
         this.loadProjects();
     }
 
@@ -125,7 +127,7 @@ class Profile extends Component<Props, State>{
         for(let i = 0; i < this.state.projectsCount; i++){
             projectsList.push(<div className={`project ${i === 0 ? 'rounded-top-left' : ''}
                                                        ${i === 2 ? 'rounded-top-right' : ''}
-                                                       ${i === this.state.roundedBottom ? 'rounded-bottom-left' : ''}`} key={i}>{i}</div>)
+                                                       ${i === this.state.roundedBottom ? 'rounded-bottom-left' : ''}`} key={i}></div>)
         }
         this.setState({projects: projectsList})
         
@@ -230,7 +232,7 @@ class Profile extends Component<Props, State>{
                 <hr />
                     <div className="projects-container">
                         {this.state.projects}
-                        <Link className="project" id="create-project" to="/project">
+                        <Link className="project" id="create-project" to='/project'>
                         </Link>
                     </div>
             </div>
