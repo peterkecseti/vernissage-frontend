@@ -414,7 +414,6 @@ input::placeholder#biginput{
 
 .upload-file-container{
   background-color: white;
-  opacity: 0.8;
   height: auto;
   min-height: 350px;
   display: flex;
