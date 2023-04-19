@@ -1,6 +1,6 @@
 
 import logoStatic from '../../assets/logo_static.png'
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ProjectUploader from "./AddProject/ProjectUploader";
 import { handleProjectTitleChange } from './AddProject/ProjectDataHandler';
 import { useNavigate } from 'react-router-dom';
@@ -12,8 +12,22 @@ function AddProject() {
     const [count, setCount] = useState(1);
     const addArt = () => {
         setCount(count + 1);
+        if(bottom.current){
+            console.log(bottom.current.scrollHeight)
+            bottom.current.scrollIntoView({behavior: 'smooth'})
+        }
       };
-
+      useEffect(() => {
+        const supportsSmoothScroll = 'scrollBehavior' in document.documentElement.style;
+        if (supportsSmoothScroll) {
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth',
+          });
+        } else {
+          window.scrollTo(0, document.body.scrollHeight);
+        }
+      });
     // const userdata = getName(localStorage.getItem('userid')!)
     const userdata = JSON.parse(localStorage.getItem('userdata')!)
     
@@ -38,7 +52,7 @@ function AddProject() {
             {[...Array(count)].map((_, i) => (
                 <ProjectUploader key={i} id={i} />
             ))}
-            <div id="add-art-button" onClick={addArt} />
+            <div id="add-art-button" ref={bottom} onClick={addArt} />
     </div>;
   }
 
