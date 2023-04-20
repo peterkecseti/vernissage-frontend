@@ -2,13 +2,14 @@
 import logoStatic from '../../assets/logo_static.png'
 import { useEffect, useRef, useState } from "react";
 import ProjectUploader from "./AddProject/ProjectUploader";
-import { handleProjectTitleChange } from './AddProject/ProjectDataHandler';
+import { handleProjectTitleChange, uploadProject } from './AddProject/ProjectDataHandler';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../elements/Footer';
 // import { getName } from './AddProject/ProjectDataHandler';
 
 function AddProject() {
-
+  const userid = localStorage.getItem('userid')
+  const userdata = JSON.parse(localStorage.getItem('userdata')!)
     const bottom = useRef<HTMLDivElement>(null)
     const [count, setCount] = useState(1);
     const addArt = () => {
@@ -29,11 +30,15 @@ function AddProject() {
           window.scrollTo(0, document.body.scrollHeight);
         }
       });
-    // const userdata = getName(localStorage.getItem('userid')!)
-    const userdata = JSON.parse(localStorage.getItem('userdata')!)
     
+    function uploadProjectHandler(){
+      if(userid && userdata){
+          uploadProject(userid, parseInt(userdata.projectsCount))
+      }
+  }
 
     return <div>
+      <button onClick={uploadProjectHandler}>save</button>
             <div className="create-project-layout">
                 <div> {/* first section */}
                     <div className="set-artwork-cover">

@@ -18,22 +18,6 @@ type DataObject = {
   
   let ProjectTitle = ""
 
-// export async function getName(userid: string){
-//     const requestData = {
-//         'userid': userid
-//     };
-
-//     const response = await fetch('http://localhost:3000/getProfileDetails', {
-//         method: 'POST',
-//         headers: {
-//             'Content-type': 'application/json'
-//         },
-//         body: JSON.stringify(requestData)
-//     });
-//     const responseBody = await response.json();
-//     console.log(responseBody)
-//   }
-
 export function updateData(position: number, description: string, title: string): void {
     if (ArrayData.descriptions.length < position) {
       while (ArrayData.descriptions.length < position) {
@@ -69,3 +53,34 @@ export const handleFileInputChange = (position: number, event: React.ChangeEvent
     }
   }
 };
+
+export async function uploadProject(userid: string, projectNumber: number){
+  // console.log(typeof(userid) + '' + userid + '\n' + typeof(projectNumber) + '' + projectNumber)
+  const requestData = {
+    userid: userid,
+    projectData: JSON.stringify(ArrayData),
+    projectTitle: ProjectTitle
+  }
+  const response = await fetch('http://localhost:3000/newProject', {
+    method: 'POST',
+    headers: {
+        'Content-type': 'application/json'
+    },
+    body: JSON.stringify(requestData)
+  });
+  const responseBody = await response.json
+  console.log(responseBody)
+
+  for(let i = 0; i < files.length; i++){
+    var re = /(?:\.([^.]+))?$/;
+    const data = new FormData();
+    const ext = re.exec(files[i].file.name)![1]
+    const filename = `${userid}-2-${projectNumber + 1}-${i}.${ext}`
+    data.append('file', files[i].file, filename)
+    await fetch(`http://localhost:3000/upload`, {
+      method: 'POST',
+      body: data
+    })
+    console.log(files[i].file.name + ' uploaded as ' + filename)
+  }
+}

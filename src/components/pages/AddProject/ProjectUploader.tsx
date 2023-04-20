@@ -15,6 +15,7 @@ function ProjectUploader(props: {id: any}){
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [displayUploaderCaption, setDisplayUploaderCaption] = useState<string | null>(null);
     const [previewImageStyleState, setPreviewImageStylesState] = useState<string | null>(null);
+    const userid = localStorage.getItem('userid')
     const uploaderCaptionStyle = {
         display: `${displayUploaderCaption}`
     }
@@ -50,6 +51,7 @@ function ProjectUploader(props: {id: any}){
         }
         
       }
+    
       
     return(
         <div>
