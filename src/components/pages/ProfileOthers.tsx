@@ -1,12 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import logoStatic from '../../assets/logo_static.png'
 import { useEffect, useState } from "react";
+import { getImages, getProjects } from "./AddProject/ProjectDataHandler";
 
 function ProfileOthers() {
     const [data, setData] = useState({} as any);
     const [projectsList, setProjectsList] = useState([] as any);
+    const [projectData, setProjectData] = useState([] as any);
+    const [imageData, setImageData] = useState([] as any);
     const [roundedBottom, setRoundedBottom] = useState(0);
     const { id } = useParams();
+    let navigate = useNavigate()
   
     const requestData = { userid: id };
     const fetchData = async () => {
@@ -41,27 +45,41 @@ function ProfileOthers() {
     }, [data]);
   
     async function loadProjects() {
-      let projectsList: any = [];
-      if (data?.projectsCount % 3 === 2) {
-        setRoundedBottom(roundedBottom - 2);
+
+      try {
+        const projectData = await getProjects(parseInt(id!));
+        const imageData = await getImages(parseInt(id!));
+        setProjectData(projectData);
+        setImageData(imageData);
+        console.log(imageData);
+    
+        let projectsList: any = [];
+        if (data?.projectsCount % 3 === 2) {
+          setRoundedBottom(roundedBottom - 2);
+        }
+        if (data?.projectsCount % 3 === 1) {
+          setRoundedBottom(roundedBottom - 1);
+        }
+        for (let i = 0; i < data?.projectsCount; i++) {
+          projectsList.push(
+            <div
+              className={`project
+                ${i === 0 ? "rounded-top-left" : ""}
+                ${i === 2 ? "rounded-top-right" : ""}
+                ${i === data?.roundedBottom ? "rounded-bottom-left" : ""}`}
+              key={i}
+              style={{ backgroundImage: `url(${imageData[i]})`}}
+              onClick={()=>{navigate(`/display-project/${projectData[i].projectId}`)}}
+            >
+              <p>{projectData[i].projectTitle}</p>
+            </div>
+          );
+        }
+        setProjectsList(projectsList);
+        console.log(data.profilePicture);
+      } catch (e) {
+        console.log(e);
       }
-      if (data?.projectsCount % 3 === 1) {
-        setRoundedBottom(roundedBottom - 1);
-      }
-      for (let i = 0; i < data?.projectsCount; i++) {
-        projectsList.push(
-          <div
-            className={`project
-              ${i === 0 ? "rounded-top-left" : ""}
-              ${i === 2 ? "rounded-top-right" : ""}
-              ${i === data?.roundedBottom ? "rounded-bottom-left" : ""}`}
-            key={i}
-          >
-          </div>
-        );
-      }
-      await setProjectsList(projectsList);
-      console.log(data.profilePicture)
     }
 
     return <div className="container centered profile-text">

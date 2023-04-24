@@ -1,10 +1,12 @@
 // Module imports
 import React, {ChangeEvent, Component, FormEvent} from 'react'
+import withRouter from '../withRouter';
 // Element imports
 import Footer from '../elements/Footer'
 // Asset imports
 import logoStatic from '../../assets/logo_static.png'
-import { Link } from 'react-router-dom'
+import { Link, NavigateFunction } from 'react-router-dom'
+import { getImages, getProfileDetails, getProjects, updateProfileDetails } from './AddProject/ProjectDataHandler';
 
 
 export interface State{
@@ -22,12 +24,13 @@ export interface State{
     roundedBottom: number,
 
     projects: any[],
-
+    projectsData: any[],
+    imageData: any[],
     updateProfilePicture?: FileList,
 }
 
 interface Props{
-
+    navigate: NavigateFunction;
 }
 class Profile extends Component<Props, State>{
     constructor(props: Props) {
@@ -45,7 +48,8 @@ class Profile extends Component<Props, State>{
             projectsCount: 0,
             profilePicture: '',
             updateProfilePicture: undefined,
-
+            projectsData: [],
+            imageData: [],
             projects: [],
             roundedBottom: 0
         }
@@ -82,20 +86,7 @@ class Profile extends Component<Props, State>{
         
     }
     loadUserDetailsFromDatabase = async() => {
-
-        const requestData = {
-            'userid': this.state.userid
-        };
-
-        const response = await fetch('http://localhost:3000/getProfileDetails', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(requestData)
-        });
-        const responseBody = await response.json();
-        console.log(responseBody)
+        const responseBody = await getProfileDetails(this.state.userid)
         this.setState({
             firstName: responseBody.firstName,
             lastName: responseBody.lastName,
@@ -106,8 +97,16 @@ class Profile extends Component<Props, State>{
             projectsCount : responseBody.projectsCount,
             profilePicture: responseBody.profilePicture
         })
+
+        const projectsData = await getProjects(this.state.userid)
+        this.setState({projectsData: projectsData})
+
+        const imageData = await getImages(this.state.userid)
+        this.setState({imageData: imageData})
+
         localStorage.setItem('projectsCount', this.state.projectsCount.toString())
         localStorage.setItem('userdata', JSON.stringify(responseBody))
+
         this.loadProjects();
     }
 
@@ -125,7 +124,12 @@ class Profile extends Component<Props, State>{
         for(let i = 0; i < this.state.projectsCount; i++){
             projectsList.push(<div className={`project ${i === 0 ? 'rounded-top-left' : ''}
                                                        ${i === 2 ? 'rounded-top-right' : ''}
-                                                       ${i === this.state.roundedBottom ? 'rounded-bottom-left' : ''}`} key={i}></div>)
+                                                       ${i === this.state.roundedBottom ? 'rounded-bottom-left' : ''}`} key={i}
+                                    onClick={()=>{this.props.navigate(`/display-project/${this.state.projectsData[i].projectId}`)}}
+                                    style={{backgroundImage: `url(${this.state.imageData[i]})`}}>
+                                                        
+                                                        <p className="allcaps">{this.state.projectsData[i].projectTitle}</p>
+                                                       </div>)
         }
         this.setState({projects: projectsList})
         
@@ -133,7 +137,6 @@ class Profile extends Component<Props, State>{
     
     handleInputDoubleclick = async() => {
         this.setState({showInput : !this.state.showInput})
-        console.log(this.state.showInput)
         if(!this.state.showInput){
             const updateData = {
                 userid: this.state.userid,
@@ -142,14 +145,7 @@ class Profile extends Component<Props, State>{
                 updateWorkExperience: this.state.workExperience,
                 updateAboutMe: this.state.aboutMe
             }
-
-            await fetch('http://localhost:3000/updateProfileDetails', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(updateData)
-        }).then(()=>{this.loadUserDetailsFromDatabase()});
+            await updateProfileDetails(updateData).then(()=>{this.loadUserDetailsFromDatabase()});
         }
     }
 
@@ -250,4 +246,4 @@ class Profile extends Component<Props, State>{
 }
 
 
-export default Profile;
+export default withRouter(Profile);

@@ -63,7 +63,7 @@ function ProjectUploader(props: {id: any}){
                               maxLength={600}/>
                 </div>
                 <div>
-                    <img src={arrowRight} alt="" id="about-arrow-right" />
+                    <img src={arrowRight} alt="" id="about-arrow-right"/>
                 </div>
                 <div className="upload-file-container">
                     <img style={previewImageStyle} src={imageUrl!} alt="" />

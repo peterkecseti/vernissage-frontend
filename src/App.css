@@ -309,24 +309,47 @@ input[type=text]::placeholder, input[type=password]::placeholder{
 
 #create-project{
   border-color: #00919d;
+  background-color: transparent !important;
   background-image: url('../src/assets/profile/add_project.png');
   background-size:cover;
   height: 10.5vw;
 }
 
 #create-project:hover{
-  border-color: #00919d;
-  background-color: #00919d;
-  background-image: url('../src/assets/profile/add_project_hover.png');
-  background-size: cover;
-  transition: .1s;
+  border-color: #00919d !important;
+  background-color: #00919d !important;
+  background-image: url('../src/assets/profile/add_project_hover.png') !important;
+  background-size: cover !important;
+  transition: .1s !important;
 }
 
 .project{
   border: 5px solid black;
   width: 100%;
   height: 10.5vw;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
 }
+.project p{
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  opacity: 0;
+}
+.project:hover p{
+  opacity: 1;
+  transition: .2s;
+}
+.project:hover{
+  background-image: none !important;
+  color: white;
+  transition: .1s;
+}
+
 #project-biginput{
   font-size: 28pt;
   font-weight: 500;
@@ -387,12 +410,33 @@ input::placeholder#biginput{
 }
 
 .set-artwork-cover{
+  position: relative;
+  display: flex;
   width: 150px;
   height: 150px;
-  border: 5px solid black;
+  outline: 5px solid black;
   border-radius: 20px 0 0 0;
   float: right;
-  margin-top: 35px
+  margin-top: 35px;
+  background-size: cover;
+  background-position: center;
+  align-items: center;
+}
+
+.set-artwork-cover input{
+  height: 100%;
+  width: 100%;
+  margin-top: 0;
+  opacity: 0;
+}
+
+.set-artwork-cover p{
+  position: absolute;
+  font-weight: bold;
+  font-size: 12px;
+  pointer-events: none;
+  user-select: none;
+  text-align: center;
 }
 
 #imgUpload{
