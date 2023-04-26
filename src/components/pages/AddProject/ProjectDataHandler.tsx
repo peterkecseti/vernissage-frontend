@@ -108,6 +108,7 @@ export async function uploadProject(userid: string, projectNumber: number){
 }
 
 export async function getProjects(userid: number){
+  console.log("datahandler: " + typeof(userid))
   const projectsResponse = await fetch('http://localhost:3000/getProjects', {
     method: 'GET',
     headers: {
@@ -115,7 +116,6 @@ export async function getProjects(userid: number){
     }
 })
 const projectsResponseBody = await projectsResponse.json()
-console.log(projectsResponseBody[0].userId)
 let projectsData = []
 for(let i = 0; i < projectsResponseBody.length; i++){
     if(projectsResponseBody[i].userId == userid){
