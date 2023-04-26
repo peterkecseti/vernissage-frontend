@@ -552,3 +552,28 @@ input::placeholder#update-profile{
   width: 60%;
   margin-top: 20px;
 }
+
+#project-back-to-profile{
+  float: right;
+}
+
+.back-to-profile-container{
+  position: relative;
+  bottom: 0;
+  height: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: right;
+  text-transform: uppercase;
+}
+
+.back-to-profile-container img{
+  height: 12px;
+}
+
+.back-to-profile-container p{
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-left: 5px;
+  user-select: none;
+}

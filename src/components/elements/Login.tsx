@@ -56,6 +56,7 @@ class Login extends Component<LoginComponentProps, State>{
         const userdata : any = jwt_decode(responseBody.token)
         
         localStorage.setItem('userid', userdata['id'])
+        localStorage.setItem('token', responseBody.token)
         
         this.setState({
             email: '',

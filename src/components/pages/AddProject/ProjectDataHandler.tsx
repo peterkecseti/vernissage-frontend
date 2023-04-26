@@ -162,6 +162,7 @@ export async function getImages(userid: number, imageType: number){
       'Content-type': 'application/json'
     }
   })
+  console.log(userid)
   const responseBody = await response.json()
   const images : any = []
   for(let i = 0; i < responseBody.length; i++){
@@ -174,6 +175,7 @@ export async function getImages(userid: number, imageType: number){
       images.push(responseBody[i].imageUrl)
     }
   }
+  console.log(images)
   return await images
 
 }
