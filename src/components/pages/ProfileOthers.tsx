@@ -48,7 +48,7 @@ function ProfileOthers() {
 
       try {
         const projectData = await getProjects(parseInt(id!));
-        const imageData = await getImages(parseInt(id!));
+        const imageData = await getImages(parseInt(id!), 1);
         setProjectData(projectData);
         setImageData(imageData);
         console.log(imageData);

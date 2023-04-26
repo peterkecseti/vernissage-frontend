@@ -107,18 +107,21 @@ export async function uploadProject(userid: string, projectNumber: number){
   }
 }
 
-export async function getProjects(userid: number){
-  console.log("datahandler: " + typeof(userid))
+export async function getProjects(userid: number, compareToProjectId?: string){
   const projectsResponse = await fetch('http://localhost:3000/getProjects', {
     method: 'GET',
     headers: {
         'Content-type': 'application/json'
     }
 })
+
 const projectsResponseBody = await projectsResponse.json()
 let projectsData = []
 for(let i = 0; i < projectsResponseBody.length; i++){
-    if(projectsResponseBody[i].userId == userid){
+    if(compareToProjectId && projectsResponseBody[i].projectId == userid){
+        return (projectsResponseBody[i])
+    }
+    else if(projectsResponseBody[i].userId == userid){
         projectsData.push(projectsResponseBody[i])
     }
 }
@@ -152,7 +155,7 @@ export async function updateProfileDetails(updateData: any){
         })
 }
 
-export async function getImages(userid: number){
+export async function getImages(userid: number, imageType: number){
   const response = await fetch('http://localhost:3000/getImages', {
     method: 'GET',
     headers: {
@@ -160,13 +163,17 @@ export async function getImages(userid: number){
     }
   })
   const responseBody = await response.json()
-  const coverImages : any = []
+  const images : any = []
   for(let i = 0; i < responseBody.length; i++){
-    
-    if(responseBody[i].imageType == 1 && responseBody[i].id == userid){
-      coverImages.push(responseBody[i].imageUrl)
+    if(imageType == 2){
+      if(responseBody[i].imageType == imageType && responseBody[i].project == userid){
+        images.push(responseBody[i].imageUrl)
+      }
+    }
+    if(responseBody[i].imageType == imageType && responseBody[i].id == userid){
+      images.push(responseBody[i].imageUrl)
     }
   }
-  return await coverImages
+  return await images
 
 }

@@ -4,6 +4,7 @@ import Home from './Home';
 import Profile from './Profile';
 import Project from './Project';
 import ProfileOthers from './ProfileOthers';
+import DisplayProject from './DisplayProject';
 
 interface State{
 
@@ -24,6 +25,7 @@ class Main extends Component<Props, {}>{
                 <Route path='/profile' element={<Profile/>} />
                 <Route path='/project' element={<Project/>} />
                 <Route path={`/profile/:id`} element={<ProfileOthers/>} />
+                <Route path={`/display-project/:id`} element={<DisplayProject/>} />
             </Routes>
         )
     }

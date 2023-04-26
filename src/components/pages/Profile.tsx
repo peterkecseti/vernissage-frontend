@@ -101,7 +101,7 @@ class Profile extends Component<Props, State>{
         const projectsData = await getProjects(parseInt(this.state.userid))
         this.setState({projectsData: projectsData})
 
-        const imageData = await getImages(parseInt(this.state.userid))
+        const imageData = await getImages(parseInt(this.state.userid), 1)
         this.setState({imageData: imageData})
 
         localStorage.setItem('projectsCount', this.state.projectsCount.toString())
