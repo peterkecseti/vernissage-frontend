@@ -1,46 +1,63 @@
-@media (min-width: 481px) and (max-width: 768px){
-
-    .forms-container{
+@media (min-width: 481px) and (max-width: 768px) {
+    body:before {
+        content: "";
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -10;
+        background: url('../assets/bkg_pix.jpg') no-repeat center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+    .forms-container {
         margin-top: 0px;
     }
-    #form-nav{
+
+    #form-nav {
         width: 70%;
     }
 
-    #form-nav li{
+    #form-nav li {
         display: inline-flex;
         width: 100%;
     }
 
-    #form-nav ul{
+    #form-nav ul {
         width: 100%;
         display: inline-flex
     }
 
-    #login-form input[type=submit], .submit-button{
+    #login-form input[type=submit],
+    .submit-button {
         width: 30%;
     }
 
-    input[type=text], input[type=password]{
+    input[type=text],
+    input[type=password] {
         width: 70%;
     }
 
-    .submit-button-container{
+    .submit-button-container {
         width: 70%;
     }
 
-    .input-half{
+    .input-half {
         width: 34.5% !important;
     }
 
-    
-    .profile-container{
+
+    .profile-container {
         width: 70%;
         transform: translateX(0%);
         margin: auto;
     }
 
-    .profile-picture-container{
+    .profile-picture-container {
         background-position: center;
         margin-right: 20px;
         width: 29vw;
@@ -48,27 +65,53 @@
         margin-bottom: 20px;
     }
 
-    .profile-container h1{
+    .profile-container h1 {
         text-align: center;
     }
 
-    .projects-container{
+    .projects-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
-      }
+    }
 
-    .project{
+    .project {
         border: 5px solid black;
         width: 100%;
         height: 21vw;
-      }
+    }
 
-      .project p{
+    .project p {
         font-size: 12px;
+    }
+
+    #create-project {
+        height: 21vw;
+    }
+
+    /* Preview Project */
+
+    .create-project-layout{
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: 22% 6% 72%;
+        grid-auto-rows: auto;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+
+    #about-artwork-content{
+        float: right;
+        text-align: right;
+        width: 100%;
+        overflow: auto;
+        margin-top: 20px;
       }
 
-      #create-project{
-        height: 21vw;
-      }
+    .about-artwork-container{
+        position: absolute;
+        height: 80%;
+        overflow: auto;
+        bottom: 0;
+    }
 }

@@ -1,4 +1,19 @@
 @media (max-width: 480px){
+    body:before {
+        content: "";
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -10;
+        background: url('../assets/bkg_pix.jpg') no-repeat center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
 
     .forms-container{
         margin-top: 80px;
@@ -60,7 +75,7 @@
 
     .project{
         border: 2px solid black;
-        width: 100%;
+        min-width: 100%;
         height: 21vw;
       }
 
@@ -70,5 +85,66 @@
 
       #create-project{
         height: 21vw;
+      }
+
+      /* Preview Project */
+
+      .create-project-layout{
+        margin: 0;
+        margin-bottom: 50px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+      }
+
+      .title-container{
+        margin: 5px;
+        margin-bottom: 20px;
+      }
+
+      #arrow-down{
+        width: 30px;
+        float: left;
+      }
+
+      #arrow-up{
+        width: 30px;
+        float: left;
+      }
+
+      #about-artwork-content{
+        letter-spacing: 2px;
+        margin: 5px;
+        text-align: left;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 12px;
+      }
+
+      .about-artwork-container{
+        margin: 5px;
+        display: flex;
+        align-items: center;
+      }
+
+      .art-container hr{
+        width: 95%;
+        margin: auto;
+        border: 1.5px solid #7f7f7f;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      .art-container h1{
+        margin-bottom: 20px;
+      }
+
+      #description-content{
+        margin-left: 5px;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+        line-height: 1.5;
       }
 }
