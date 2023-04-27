@@ -154,7 +154,7 @@ class Profile extends Component<Props, State>{
         return(
         <div className='container centered profile-text'>
             <Link to="/">
-                <img src={logoStatic} alt="Profile picture" id="logo-static"/>
+                <img src={logoStatic} alt="" id="logo-static"/>
             </Link>
             <div className='profile-container'>
                 <h1>{this.state.firstName} {this.state.lastName}</h1> {/* ! */}
@@ -217,8 +217,7 @@ class Profile extends Component<Props, State>{
                     )}
                 </div>
                 <hr />
-                    <p className="bold allcaps">A few words about me</p>
-                    <br />
+                    <p className="bold allcaps about-me-caption">A few words about me</p>
                     {this.state.showInput ? (
                         <p className='edit-hover'
                            onDoubleClick={this.handleInputDoubleclick}>
