@@ -7,6 +7,7 @@ import Footer from '../elements/Footer'
 import logoStatic from '../../assets/logo_static.png'
 import { Link, NavigateFunction } from 'react-router-dom'
 import { getImages, getProfileDetails, getProjects, updateProfileDetails } from './AddProject/ProjectDataHandler';
+import { address } from '../../backed.url';
 
 
 export interface State{
@@ -79,7 +80,7 @@ class Profile extends Component<Props, State>{
         const ext = re.exec(this.state.updateProfilePicture[0].name)![1]
         const filename = `${this.state.userid}-0-0-0.${ext}`
         data.append('file', this.state.updateProfilePicture[0], filename)
-        await fetch(`http://localhost:3000/upload`, {
+        await fetch(`http://${address}:3000/upload`, {
             method: 'POST',
             body: data
         }).then(()=>{this.loadUserDetailsFromDatabase()})

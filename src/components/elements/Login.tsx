@@ -3,6 +3,7 @@ import React, {Component, FormEvent} from 'react'
 import jwt_decode from 'jwt-decode'
 import withRouter from '../withRouter';
 import { NavigateFunction } from 'react-router-dom';
+import { address } from '../../backed.url';
 
 
 interface State{
@@ -38,7 +39,7 @@ class Login extends Component<LoginComponentProps, State>{
             'password': this.state.password,
         };
   
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch(`http://${address}:3000/login`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'

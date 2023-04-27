@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { address } from "../../../backed.url";
 
 type DataObject = {
     descriptions: string[],
@@ -71,7 +72,7 @@ export async function uploadProject(userid: string, projectNumber: number){
     projectData: JSON.stringify(ArrayData),
     projectTitle: ProjectTitle
   }
-  const response = await fetch('http://localhost:3000/newProject', {
+  const response = await fetch(`http://${address}:3000/newProject`, {
     method: 'POST',
     headers: {
         'Content-type': 'application/json'
@@ -86,7 +87,7 @@ export async function uploadProject(userid: string, projectNumber: number){
     const ext = re.exec(files[i].file.name)![1]
     const filename = `${userid}-2-${projectNumber + 1}-${i}.${ext}`
     data.append('file', files[i].file, filename)
-    await fetch(`http://localhost:3000/upload`, {
+    await fetch(`http://${address}:3000/upload`, {
       method: 'POST',
       body: data
     })
@@ -96,7 +97,7 @@ export async function uploadProject(userid: string, projectNumber: number){
   const filename = `${userid}-1-${projectNumber + 1}-0.${coverImage.name}`
   data.append('file', coverImage, filename)
   console.log(data)
-  await fetch(`http://localhost:3000/upload`, {
+  await fetch(`http://${address}:3000/upload`, {
     method: 'POST',
     body: data
     })
@@ -108,7 +109,7 @@ export async function uploadProject(userid: string, projectNumber: number){
 }
 
 export async function getProjects(userid: number, compareToProjectId?: string){
-  const projectsResponse = await fetch('http://localhost:3000/getProjects', {
+  const projectsResponse = await fetch(`http://${address}:3000/getProjects`, {
     method: 'GET',
     headers: {
         'Content-type': 'application/json'
@@ -134,7 +135,7 @@ export async function getProfileDetails(userid: number){
             'userid': userid
         };
 
-        const response = await fetch('http://localhost:3000/getProfileDetails', {
+        const response = await fetch(`http://${address}:3000/getProfileDetails`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -146,7 +147,7 @@ export async function getProfileDetails(userid: number){
 }
 
 export async function updateProfileDetails(updateData: any){
-  await fetch('http://localhost:3000/updateProfileDetails', {
+  await fetch(`http://${address}:3000/updateProfileDetails`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -156,7 +157,7 @@ export async function updateProfileDetails(updateData: any){
 }
 
 export async function getImages(userid: number, imageType: number){
-  const response = await fetch('http://localhost:3000/getImages', {
+  const response = await fetch(`http://${address}:3000/getImages`, {
     method: 'GET',
     headers: {
       'Content-type': 'application/json'

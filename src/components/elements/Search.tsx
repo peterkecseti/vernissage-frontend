@@ -2,6 +2,7 @@
 import React, {Component} from 'react'
 import { NavigateFunction } from 'react-router-dom'
 import withRouter from '../withRouter';
+import { address } from '../../backed.url';
 // Element imports
 // Asset imports
 
@@ -49,7 +50,7 @@ class Search extends React.Component<SearchComponentProps, State, FoundUser>{
         }
     
         const requestData = { searchTerm: this.state.searchFieldValue };
-        const response = await fetch('http://localhost:3000/searchUsers', {
+        const response = await fetch(`http://${address}:3000/searchUsers`, {
           method: 'POST',
           headers: {
             'Content-type': 'application/json',

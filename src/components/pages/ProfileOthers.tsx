@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import logoStatic from '../../assets/logo_static.png'
 import { useEffect, useState } from "react";
 import { getImages, getProjects } from "./AddProject/ProjectDataHandler";
+import { address } from "../../backed.url";
 
 function ProfileOthers() {
     const [data, setData] = useState({} as any);
@@ -15,7 +16,7 @@ function ProfileOthers() {
     const requestData = { userid: id };
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/getProfileDetails", {
+        const response = await fetch(`http://${address}:3000/getProfileDetails`, {
           method: "POST",
           headers: {
             "Content-type": "application/json",

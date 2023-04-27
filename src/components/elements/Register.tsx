@@ -1,5 +1,6 @@
 // Module imports
 import React, {Component} from 'react'
+import { address } from '../../backed.url'
 // Element imports
 // Asset imports
 
@@ -62,7 +63,7 @@ class Register extends Component<RegisterComponentProps, State>{
           passwordAgain : passwordAgainInput
         }
     
-        let response = await fetch('http://localhost:3000/register', {
+        let response = await fetch(`http://${address}:3000/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
