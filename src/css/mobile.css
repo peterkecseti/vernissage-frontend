@@ -1,0 +1,35 @@
+@media (max-width: 480px){
+
+    .forms-container{
+        margin-top: 80px;
+    }
+    #form-nav{
+        display: block;
+        width: 70%;
+    }
+
+    #form-nav li{
+        display: flex;
+        width: 100%;
+    }
+
+    #form-nav ul{
+        width: 100%;
+    }
+
+    #login-form input[type=submit], .submit-button{
+        width: 30%;
+    }
+
+    input[type=text], input[type=password]{
+        width: 70%;
+    }
+
+    .submit-button-container{
+        width: 70%;
+    }
+
+    .input-half{
+        width: 34.5% !important;
+    }
+}

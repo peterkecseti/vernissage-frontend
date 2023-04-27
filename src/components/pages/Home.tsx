@@ -8,6 +8,10 @@ import Footer from '../elements/Footer'
 // Asset imports
 import bgVideo from '../../assets/vernissage02.mp4'
 import logoGif from '../../assets/logo.gif'
+// CSS imports
+import '../../css/mobile.css'
+import '../../css/tablet.css'
+import '../../css/small-desktop.css'
 
 interface State{
     selected : number;

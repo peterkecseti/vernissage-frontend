@@ -1,10 +1,10 @@
-@media (min-width: 481px) and (max-width: 768px){
+@media (min-width: 769px) and (max-width: 1200px){
 
     .forms-container{
         margin-top: 0px;
     }
     #form-nav{
-        width: 70%;
+        width: 50%;
     }
 
     #form-nav li{
@@ -18,18 +18,18 @@
     }
 
     #login-form input[type=submit], .submit-button{
-        width: 30%;
+        width: 20%;
     }
 
     input[type=text], input[type=password]{
-        width: 70%;
+        width: 50%;
     }
 
     .submit-button-container{
-        width: 70%;
+        width: 50%;
     }
 
     .input-half{
-        width: 34.5% !important;
+        width: 24.5% !important;
     }
 }
