@@ -395,6 +395,8 @@ input::placeholder#biginput{
   letter-spacing: 2px;
 }
 
+
+
 #about-arrow-right{
   width: 70%;
   margin: 5px
@@ -571,7 +573,7 @@ input::placeholder#update-profile{
 #about-artwork-content{
   float: right;
   text-align: right;
-  width: 60%;
+  width: 80%;
   margin-top: 20px;
 }
 

@@ -10,7 +10,7 @@ import GetScreenSize from "../../../GetScreenSize";
 
 
 
-function DisplayProjectBig() {
+function DisplayProjectSmallDesktop() {
     const { id } = useParams();
     const [userdata, setUserdata] = useState([] as any)
     const [projectData, setProjectData] = useState([] as any);
@@ -54,7 +54,7 @@ function DisplayProjectBig() {
             projects.push(
                 <>
                 <div key={i} className="create-project-layout">
-                    <div>
+                    <div style={{position: 'relative'}}>
                         <p id="about-artwork">A few words <br /> about this artwork</p>
                         <div className="about-artwork-container">
                             <p id="about-artwork-content">{projectData.descriptions[i]}</p>
@@ -97,27 +97,26 @@ function DisplayProjectBig() {
             <div className="create-project-layout">
                 <div></div> {/* first section */}
                 <div></div> {/* second section */}
-                <div className="centered">{/* third section */}
-                    <img src={logoStatic} alt="" id="logo-static" />
+                <div className="">{/* third section */}
+                        <img src={logoStatic} alt="" id="logo-static" />
                     <h1 style={{marginTop: '20px'}}>{userdata.firstName} {userdata.lastName}</h1>
                 </div>
-                <div></div> {/* fourth section */}
             </div>
             <div className="create-project-layout">
-            <div className="back-to-profile-container" onClick={handleBackToProfile}>
+                <div className="back-to-profile-container" onClick={handleBackToProfile}>
                     <img src={arrowLeft} alt="" />
                     <p id="project-back-to-profile">back to profile</p>
                 </div>
                 <div>
                 </div>
-                    <div>
-                        <hr />
-                    </div>
+                <div>
+                    <hr />
                 </div>
+            </div>
             <div className="create-project-layout">
             <div></div>
             <div></div>
-            <div className="centered">
+            <div className="">
                 <h1>{projectTitle}</h1>
             </div>
             </div>
@@ -126,4 +125,4 @@ function DisplayProjectBig() {
         </div>)
 }
 
-export default DisplayProjectBig;
+export default DisplayProjectSmallDesktop;

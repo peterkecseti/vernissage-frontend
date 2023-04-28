@@ -10,6 +10,7 @@ import GetScreenSize from "../../GetScreenSize";
 import DisplayProjectBig from "./DisplayProject/Big";
 import DisplayProjectMobile from "./DisplayProject/Mobile";
 import DisplayProjectTablet from "./DisplayProject/Tablet";
+import DisplayProjectSmallDesktop from "./DisplayProject/SmallDesktop";
 
 
 
@@ -22,7 +23,7 @@ function DisplayProject() {
     switch(screenSize){
         case 0: return <DisplayProjectMobile/>
         case 1: return <DisplayProjectTablet/>
-        case 2: return <DisplayProjectBig/>
+        case 2: return <DisplayProjectTablet/>
     }
     return <DisplayProjectBig/>
 }

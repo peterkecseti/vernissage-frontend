@@ -196,7 +196,6 @@ class Profile extends Component<Props, State>{
                                value={this.state.occupation}
                                onDoubleClick={(e)=>{this.setState({}); this.handleInputDoubleclick()}}
                                onChange={(e)=>{this.setState({occupation : e.target.value})}}/>
-                        <button>delete</button>
                         
                         </div>
                     )}

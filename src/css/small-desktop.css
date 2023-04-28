@@ -1,45 +1,48 @@
-@media (min-width: 769px) and (max-width: 1200px){
+@media (min-width: 769px) and (max-width: 1200px) {
 
-    .forms-container{
+    .forms-container {
         margin-top: 0px;
     }
-    #form-nav{
+
+    #form-nav {
         width: 50%;
     }
 
-    #form-nav li{
+    #form-nav li {
         display: inline-flex;
         width: 100%;
     }
 
-    #form-nav ul{
+    #form-nav ul {
         width: 100%;
         display: inline-flex
     }
 
-    #login-form input[type=submit], .submit-button{
+    #login-form input[type=submit],
+    .submit-button {
         width: 20%;
     }
 
-    input[type=text], input[type=password]{
+    input[type=text],
+    input[type=password] {
         width: 50%;
     }
 
-    .submit-button-container{
+    .submit-button-container {
         width: 50%;
     }
 
-    .input-half{
+    .input-half {
         width: 24.5% !important;
     }
 
-    .profile-container{
+    .profile-container {
         width: 50%;
         transform: translateX(0%);
         margin: auto;
     }
 
-    .profile-picture-container{
+    .profile-picture-container {
         background-position: center;
         margin-right: 20px;
         width: 18vw;
@@ -47,27 +50,53 @@
         margin-bottom: 20px;
     }
 
-    .profile-container h1{
+    .profile-container h1 {
         text-align: center;
     }
 
-    .projects-container{
+    .projects-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
-      }
+    }
 
-    .project{
+    .project {
         border: 5px solid black;
         width: 100%;
         height: 15vw;
-      }
+    }
 
-      .project p{
+    .project p {
         font-size: 12px;
-      }
+    }
 
-      #create-project{
+    #create-project {
         height: 15vw;
-      }
+    }
+
+    /* Preview Project */
+
+    .create-project-layout {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: 22% 6% 72%;
+        grid-auto-rows: auto;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+
+    #about-artwork-content {
+        float: right;
+        text-align: right;
+        width: 100%;
+        overflow: auto;
+        margin-top: 20px;
+    }
+
+    .about-artwork-container {
+        position: absolute;
+        height: 90%;
+        overflow: auto;
+        bottom: 0;
+    }
 }
