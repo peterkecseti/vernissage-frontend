@@ -1,7 +1,5 @@
 // Module imports
-import React, {Component, FormEvent} from 'react'
-import jwt_decode from 'jwt-decode'
-// Element imports
+import {Component} from 'react'
 // Asset imports
 import logoWhite from '../../assets/logo_white.png'
 

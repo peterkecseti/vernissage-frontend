@@ -72,7 +72,6 @@ export async function uploadProject(userid: string, projectNumber: number){
     },
     body: JSON.stringify(requestData)
   });
-  const responseBody = await response.json
 
   for(let i = 0; i < files.length; i++){
     const data = new FormData();
@@ -109,10 +108,10 @@ export async function getProjects(userid: number, compareToProjectId?: string){
 const projectsResponseBody = await projectsResponse.json()
 let projectsData = []
 for(let i = 0; i < projectsResponseBody.length; i++){
-    if(compareToProjectId && projectsResponseBody[i].projectId == userid){
+    if(compareToProjectId && projectsResponseBody[i].projectId === userid){
         return (projectsResponseBody[i])
     }
-    else if(projectsResponseBody[i].userId == userid){
+    else if(projectsResponseBody[i].userId === userid){
         projectsData.push(projectsResponseBody[i])
     }
 }
@@ -155,14 +154,15 @@ export async function getImages(userid: number, imageType: number){
   const responseBody = await response.json()
   const images : any = []
   for(let i = 0; i < responseBody.length; i++){
-    if(imageType == 2){
-      if(responseBody[i].imageType == imageType && responseBody[i].project == userid){
+    if(imageType === 2){
+      if(responseBody[i].imageType === imageType && responseBody[i].project === userid){
         images.push(responseBody[i].imageUrl)
       }
     }
-    if(responseBody[i].imageType == imageType && responseBody[i].id == userid){
+    if(responseBody[i].imageType === imageType && responseBody[i].id === userid){
       images.push(responseBody[i].imageUrl)
     }
+
   }
   return await images
 

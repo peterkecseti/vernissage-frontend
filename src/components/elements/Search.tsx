@@ -1,10 +1,8 @@
 // Module imports
-import React, {Component} from 'react'
+import React from 'react'
 import { NavigateFunction } from 'react-router-dom'
 import withRouter from '../withRouter';
 import { address } from '../../backed.url';
-// Element imports
-// Asset imports
 
 interface State{
     selected : number,
@@ -44,7 +42,7 @@ class Search extends React.Component<SearchComponentProps, State, FoundUser>{
     handleSearch = async () => {
         this.props.onChildProps({responseMessage: 'Searching'})
     
-        if (this.state.searchFieldValue == '') {
+        if (this.state.searchFieldValue === '') {
             this.props.onChildProps({ responseMessage: "Search field must not be empty" });
             return;
         }
@@ -75,7 +73,7 @@ class Search extends React.Component<SearchComponentProps, State, FoundUser>{
      loadFoundUsers = () => {
          const user = this.state.foundUsers
          var userList = []
-         if(user.length == 1){
+         if(user.length === 1){
             this.props.navigate(`profile/${user[0].id}`)
          }
          

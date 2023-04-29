@@ -1,8 +1,6 @@
 // Module imports
-import React, {Component} from 'react'
+import {Component} from 'react'
 import { address } from '../../backed.url'
-// Element imports
-// Asset imports
 
 interface State{
     selected : number

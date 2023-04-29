@@ -7,7 +7,6 @@
 
 function GetScreenSize(){
     const width = window.innerWidth
-    console.log(width)
     if(width <= 480){
         return 0
     }

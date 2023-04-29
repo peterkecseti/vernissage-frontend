@@ -1,5 +1,5 @@
 // Module imports
-import React, {Component, FormEvent} from 'react'
+import {Component, FormEvent} from 'react'
 import jwt_decode from 'jwt-decode'
 import withRouter from '../withRouter';
 import { NavigateFunction } from 'react-router-dom';
