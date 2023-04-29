@@ -93,7 +93,7 @@ function DisplayProjectSmallDesktop() {
         navigate(`/profile/${projectOwnerId}`)
     }
     return (
-        <div className="">
+        <div>
             <div className="create-project-layout">
                 <div></div> {/* first section */}
                 <div></div> {/* second section */}
@@ -121,7 +121,7 @@ function DisplayProjectSmallDesktop() {
             </div>
             </div>
             {projectComponents()}
-            
+            <div style={{marginBottom: '30px'}}/>
         </div>)
 }
 

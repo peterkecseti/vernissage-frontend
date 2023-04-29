@@ -7,6 +7,7 @@ import arrowLeft from '../../../assets/createProject/arrowLeft.png'
 import { useEffect, useRef, useState } from "react";
 import { getImages, getProfileDetails, getProjects } from "../AddProject/ProjectDataHandler";
 import GetScreenSize from "../../../GetScreenSize";
+import Footer from "../../elements/Footer";
 
 
 
@@ -92,8 +93,8 @@ function DisplayProjectBig() {
         }
         navigate(`/profile/${projectOwnerId}`)
     }
-    return (
-        <div className="">
+    return (<>
+        <div style={{margin: '5px'}}>
             <div className="create-project-layout">
                 <div></div> {/* first section */}
                 <div></div> {/* second section */}
@@ -121,8 +122,9 @@ function DisplayProjectBig() {
             </div>
             </div>
             {projectComponents()}
-            
-        </div>)
+        </div>
+        <div style={{marginBottom: '30px'}}/>
+        </>)
 }
 
 export default DisplayProjectBig;

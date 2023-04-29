@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import Profile from './Profile';
-import Project from './Project';
+import Project from './Project/AddProject';
 import ProfileOthers from './ProfileOthers';
 import DisplayProject from './DisplayProject';
 

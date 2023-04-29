@@ -1,13 +1,13 @@
 
-import logoStatic from '../../assets/logo_static.png'
+import logoStatic from '../../../assets/logo_static.png'
 import { useEffect, useRef, useState } from "react";
-import ProjectUploader from "./AddProject/ProjectUploader";
-import { handleProjectTitleChange, uploadProject, handleCoverImage } from './AddProject/ProjectDataHandler';
+import ProjectUploader from "./ProjectUploader/ProjectUploader";
+import { handleProjectTitleChange, uploadProject, handleCoverImage } from '../AddProject/ProjectDataHandler';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../elements/Footer';
+import Footer from '../../elements/Footer';
 // import { getName } from './AddProject/ProjectDataHandler';
 
-function AddProject() {
+function AddProjectBig() {
   const userid = localStorage.getItem('userid')
   const userdata = JSON.parse(localStorage.getItem('userdata')!)
   const bottom = useRef<HTMLDivElement>(null)
@@ -53,7 +53,6 @@ function AddProject() {
     }
 
     return <div>
-      <button onClick={uploadProjectHandler}>save</button>
             <div className="create-project-layout">
                 <div> {/* first section */}
                     <div className="set-artwork-cover" style={{backgroundImage: `url(${previewCoverImage})`}}>
@@ -74,9 +73,16 @@ function AddProject() {
             {[...Array(count)].map((_, i) => (
                 <ProjectUploader key={i} id={i} />
             ))}
-            <div id="add-art-button" ref={bottom} onClick={addArt} />
+            <div className='add-save-container'>
+              <div className='add-save-subcontainer'>
+                <div id="add-art-button" ref={bottom} onClick={addArt} />
+                <div id="save-project-button" onClick={uploadProjectHandler}>
+                  <p className='allcaps'>save project</p>
+                </div>
+              </div>
+            </div>
             <Footer></Footer>
     </div>;
   }
 
-export default AddProject;
+export default AddProjectBig;

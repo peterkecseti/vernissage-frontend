@@ -1,15 +1,14 @@
-import logoStatic from '../../assets/logo_static.png'
-import arrowRight from '../../../assets/createProject/arrowRight.png'
-import arrowUp from '../../../assets/createProject/arrowUp.png'
+import arrowRight from '../../../../assets/createProject/arrowRight.png'
+import arrowUp from '../../../../assets/createProject/arrowUp.png'
 import { ChangeEvent, useEffect, useState } from 'react';
-import { updateData, handleFileInputChange } from './ProjectDataHandler';
+import { updateData, handleFileInputChange } from '../../AddProject/ProjectDataHandler';
 
 export interface ProjectContent {
     title: string;
     description: string;
 }
 
-function ProjectUploader(props: {id: any}){
+function ProjectUploaderBig(props: {id: any}){
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -85,4 +84,4 @@ function ProjectUploader(props: {id: any}){
     )
 }
 
-export default ProjectUploader;
+export default ProjectUploaderBig;

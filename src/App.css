@@ -45,6 +45,22 @@ body{
   background-attachment: fixed;
 }
 
+body:before {
+  content: "";
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  background: url('./assets/bkg_pix.jpg') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 body::-webkit-scrollbar{
   display: none;
 }
@@ -56,26 +72,21 @@ a{
   text-decoration: none;
   color: black;
 }
-footer{
+footer {
   background-color: black;
   color: white;
-  margin: auto;
-  margin-top: 30px;
-  left: 0;
-  top: 0;
+  position: fixed;
+  bottom: 0;
   height: 80px;
   width: 100%;
   text-align: center;
+  margin-top: 20px; /* adjust this value to change the distance between the content and footer */
 }
 
 
-/* .purge > *{
-  margin: 0 !important;
-  padding: 0 !important;
-  width: auto !important;
-  height: auto !important;
-  display: block !important;
-} */
+#footer-container{
+  margin-bottom: 80px;
+}
 
 #logo-static{
   width: 100px; 
@@ -400,6 +411,41 @@ input::placeholder#biginput{
 #about-arrow-right{
   width: 70%;
   margin: 5px
+}
+
+.add-save-container{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: inline-flex;
+  justify-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.add-save-subcontainer{
+  justify-items: center;
+  justify-self: center;
+  display: flex;
+  width: 40vh;
+}
+
+#save-project-button{
+  width: 200px;
+  height: 50px;
+  border: 5px solid black;
+  margin: auto;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+#save-project-button:hover{
+  border: 5px solid #00919d;
+  color: #00919d;
+  font-weight: bold;
+  transition: .1s;
 }
 
 #add-art-button{

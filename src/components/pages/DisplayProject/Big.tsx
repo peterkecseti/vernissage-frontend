@@ -7,6 +7,7 @@ import arrowLeft from '../../../assets/createProject/arrowLeft.png'
 import { useEffect, useRef, useState } from "react";
 import { getImages, getProfileDetails, getProjects } from "../AddProject/ProjectDataHandler";
 import GetScreenSize from "../../../GetScreenSize";
+import Footer from "../../elements/Footer";
 
 
 
@@ -122,7 +123,7 @@ function DisplayProjectBig() {
             </div>
             </div>
             {projectComponents()}
-            
+            <div style={{marginBottom: '30px'}}/>
         </div>)
 }
 

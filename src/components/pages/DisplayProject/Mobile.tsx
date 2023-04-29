@@ -8,6 +8,7 @@ import arrowDown from '../../../assets/createProject/arrowDown.png'
 import { useEffect, useRef, useState } from "react";
 import { getImages, getProfileDetails, getProjects } from "../AddProject/ProjectDataHandler";
 import GetScreenSize from "../../../GetScreenSize";
+import Footer from "../../elements/Footer";
 
 
 
@@ -84,7 +85,8 @@ function DisplayProjectMobile() {
         }
         navigate(`/profile/${projectOwnerId}`)
     }
-    return (<div>
+    return (<>
+    <div style={{margin: '5px'}}>
         <div className="background"/>
         <div className="art-container">
             <div className="centered">
@@ -94,9 +96,10 @@ function DisplayProjectMobile() {
                 <h1>{projectTitle}</h1>
             </div>
             {projectComponents()}
-            
         </div>
-        </div>)
+    </div>
+    <div style={{marginBottom: '30px'}}/>
+        </>)
 }
 
 export default DisplayProjectMobile;

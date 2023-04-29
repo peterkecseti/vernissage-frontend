@@ -152,6 +152,7 @@ class Profile extends Component<Props, State>{
 
     render() {
         return(
+            <div>
         <div className='container centered profile-text'>
             <Link to="/">
                 <img src={logoStatic} alt="" id="logo-static"/>
@@ -237,9 +238,9 @@ class Profile extends Component<Props, State>{
                         </Link>
                     </div>
             </div>
-            {/* <Footer/> */}
-            <Footer></Footer>
         </div>
+    </div>
+
         )
     }
 }
