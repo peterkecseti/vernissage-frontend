@@ -70,7 +70,6 @@ class Register extends Component<RegisterComponentProps, State>{
           },
           body: JSON.stringify(adat),
         });
-        console.log(JSON.stringify(adat))
         this.props.onChildProps({ responseMessage: "Registration successful, please log in" });
         this.setState({ 
           firstNameInput : '',

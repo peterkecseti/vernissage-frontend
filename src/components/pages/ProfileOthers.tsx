@@ -52,7 +52,6 @@ function ProfileOthers() {
         const imageData = await getImages(parseInt(id!), 1);
         setProjectData(projectData);
         setImageData(imageData);
-        console.log(imageData);
     
         let projectsList: any = [];
         if (data?.projectsCount % 3 === 2) {

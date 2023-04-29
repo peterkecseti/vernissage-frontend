@@ -36,8 +36,6 @@ function DisplayProjectBig() {
 
         const userData = await getProfileDetails(projectData.userId)
         setUserdata(userData)
-        console.log(userData)
-        console.log(imageData)
       }
       catch(e){
         console.log(e)

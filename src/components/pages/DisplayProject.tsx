@@ -17,7 +17,6 @@ import DisplayProjectSmallDesktop from "./DisplayProject/SmallDesktop";
 function DisplayProject() {
     const [screenSize, setScreenSize] = useState(GetScreenSize)
     useEffect(()=>{
-        console.log('screen size:' + screenSize)
         window.addEventListener('resize', ()=>{setScreenSize(GetScreenSize)})
     }, [])
     switch(screenSize){

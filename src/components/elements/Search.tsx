@@ -68,7 +68,6 @@ class Search extends React.Component<SearchComponentProps, State, FoundUser>{
         }
     
         this.setState({ foundUsers: responseBody });
-        console.log(this.state.foundUsers)
         this.loadFoundUsers()
         this.props.onChildProps({responseMessage: ""});
       };

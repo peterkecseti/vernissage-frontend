@@ -58,7 +58,6 @@ class Profile extends Component<Props, State>{
     componentDidMount(): void {
         if(!localStorage.getItem('userid')){
             alert("Please log in first")
-            console.log(localStorage.getItem('userid'))
         }
         this.loadUserDetailsFromDatabase();
 

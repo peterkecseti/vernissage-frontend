@@ -30,13 +30,10 @@ export function updateData(position: number, description: string, title: string)
     }
     ArrayData.descriptions[position] = description;
     ArrayData.titles[position] = title;
-
-    console.log(JSON.stringify(ArrayData))
   }
 
 export function handleProjectTitleChange(event: ChangeEvent<HTMLInputElement>){
   ProjectTitle = event.target.value;
-  console.log(ProjectTitle)
 }
 
 export const handleFileInputChange = (position: number, event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -52,21 +49,17 @@ export const handleFileInputChange = (position: number, event: React.ChangeEvent
     } else{
       const newFiles = [...files, { position, file: newFile }];
       files = newFiles
-      console.log(files)
     }
   }
 };
 export function handleCoverImage(event: React.ChangeEvent<HTMLInputElement>){
-  console.log(event.target.files![0].name)
   if(event.target.files){
     coverImage = event.target.files[0]
-    console.log(coverImage.name)
   }
 }
 
 export async function uploadProject(userid: string, projectNumber: number){
   try{
-  // console.log(typeof(userid) + '' + userid + '\n' + typeof(projectNumber) + '' + projectNumber)
   const requestData = {
     userid: userid,
     projectData: JSON.stringify(ArrayData),
@@ -80,7 +73,6 @@ export async function uploadProject(userid: string, projectNumber: number){
     body: JSON.stringify(requestData)
   });
   const responseBody = await response.json
-  console.log(responseBody)
 
   for(let i = 0; i < files.length; i++){
     const data = new FormData();
@@ -91,12 +83,10 @@ export async function uploadProject(userid: string, projectNumber: number){
       method: 'POST',
       body: data
     })
-    console.log(files[i].file.name + ' uploaded as ' + filename)
   }  
   const data = new FormData()
   const filename = `${userid}-1-${projectNumber + 1}-0.${coverImage.name}`
   data.append('file', coverImage, filename)
-  console.log(data)
   await fetch(`http://${address}:3000/upload`, {
     method: 'POST',
     body: data
@@ -126,7 +116,6 @@ for(let i = 0; i < projectsResponseBody.length; i++){
         projectsData.push(projectsResponseBody[i])
     }
 }
-console.log(projectsData)
 return projectsData;
 }
 
@@ -163,7 +152,6 @@ export async function getImages(userid: number, imageType: number){
       'Content-type': 'application/json'
     }
   })
-  console.log(userid)
   const responseBody = await response.json()
   const images : any = []
   for(let i = 0; i < responseBody.length; i++){
@@ -176,7 +164,6 @@ export async function getImages(userid: number, imageType: number){
       images.push(responseBody[i].imageUrl)
     }
   }
-  console.log(images)
   return await images
 
 }
