@@ -97,6 +97,7 @@ footer {
 }
 
 #video-container {
+  min-width: 100%;
   position: fixed;
   display: flex;
 }
