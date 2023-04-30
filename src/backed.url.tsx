@@ -1,1 +1,5 @@
-export const address = "192.168.1.70";
+/*
+This specifies the backend server's IP address
+format: http://${address}/<API endpoint>
+*/
+export const address = "localhost";
