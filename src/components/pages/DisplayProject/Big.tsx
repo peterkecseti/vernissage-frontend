@@ -40,9 +40,6 @@ function DisplayProjectBig() {
   useEffect(() => {
     fetchData();
   }, [id]);
-  function handleToggleFullscreen(index: number) {
-    alert(index);
-  }
   function projectComponents() {
     let projects = [];
     for (let i = 0; i < projectLength!; i++) {
@@ -63,9 +60,6 @@ function DisplayProjectBig() {
             <div>
               {imageData[i] ? (
                 <img
-                  onClick={() => {
-                    handleToggleFullscreen(i);
-                  }}
                   src={imageData[i]}
                   style={{ width: "100%" }}
                   alt=""

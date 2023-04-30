@@ -168,7 +168,7 @@ export async function getImages(userid: number, imageType: number) {
         images.push(responseBody[i].imageUrl);
       }
     }
-    if (
+    else if (
       responseBody[i].imageType === imageType &&
       responseBody[i].id === userid
     ) {
